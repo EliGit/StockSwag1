@@ -1,0 +1,3 @@
+Tiistai 3.9.2013, 2h:
+- Maven säätöä
+- GitHub kikkailua
