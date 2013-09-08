@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockanalyzer;
+package com.mycompany.stockswag.stockanalyzer;
 
 /**
  *
@@ -18,8 +18,8 @@ public class Stock {
     private String pb;
     
     public Stock(String symbol, String name, String closePrice, String pe, String eps, String ps, String pb){
-        this.name = name;
         this.symbol = symbol;
+        this.name = name;        
         this.closePrice = closePrice;
         this.pe = pe;
         this.eps = eps;
@@ -55,11 +55,7 @@ public class Stock {
         return closePrice;
     }
     
-    
-        
-    
-    
-    
-    
-    
+    public String StockString(){
+        return this.name + this.symbol + this.closePrice + this.eps + this.pe + this.ps + this.pb;
+    }
 }

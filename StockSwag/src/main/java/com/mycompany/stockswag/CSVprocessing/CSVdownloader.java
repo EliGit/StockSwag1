@@ -27,6 +27,7 @@ public class CSVdownloader {
     public void downloadCSV(){                
         File f = new File("sad");
         try {
+            System.out.println("Fetching: " + url.toString());
             FileUtils.copyURLToFile(url, f);
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);

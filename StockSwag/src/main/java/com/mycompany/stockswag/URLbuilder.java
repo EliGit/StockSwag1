@@ -4,7 +4,11 @@
  */
 package com.mycompany.stockswag;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,6 +16,7 @@ import java.util.List;
  */
 public class URLbuilder {
     private List<String> symbols;
+    private String stringURL;
     
     URLbuilder(List<String> symbols) {
         this.symbols = symbols;
@@ -19,7 +24,7 @@ public class URLbuilder {
     
     //http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snl1rep5p6
     
-    public String buildURL(){
+    public void buildStringURL(){
         String url_first = "http://finance.yahoo.com/d/quotes.csv?s=";
         String url_last = "&f=snl1rep5p6";
         String url_middle = "";
@@ -28,7 +33,25 @@ public class URLbuilder {
             url_middle += s+"+";            
         }        
         url_middle = url_middle.substring(0, url_middle.length()-1);                
-        String url = url_first + url_middle + url_last;                
+        String url_full = url_first + url_middle + url_last;                
+        this.stringURL = url_full;        
+    }
+    
+    public List<String> getSymbols(){
+        return this.symbols;
+    }
+    
+    public String getStringURL(){
+        return this.stringURL;
+    }
+        
+    public URL getURL(){
+        URL url = null;
+        try {
+            url = new URL(this.stringURL);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return url;
         
     }

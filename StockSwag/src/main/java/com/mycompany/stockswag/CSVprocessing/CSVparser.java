@@ -5,14 +5,8 @@
 package com.mycompany.stockswag.CSVprocessing;
 
 import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -31,28 +25,27 @@ public class CSVparser {
         this.file = file;
     }
     
-    public void parseCSVline(){
+    public File getCSV(){
+        return this.file;
+    }
+    
+    public void parseCSVfile(){
         String[] CSVline = null;                
         String line = "";
         String cvsSplitBy = ",";        
-        try {            
-            BufferedReader br = new BufferedReader(new FileReader(this.file));                                
-            
-            
-            while ((line = br.readLine()) != null) {
+                  
+        MyFileReader fr = new MyFileReader();
+        fr.loadFile(this.file);                
+        
+        while (fr.getHasNextLine()) {
+            line = fr.readLine();
             // use comma as separator                
-                CSVline = line.split(cvsSplitBy);
-                SaveLine(CSVline);
-            }
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(CSVparser.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(CSVparser.class.getName()).log(Level.SEVERE, null, ex);
-            }                
+            CSVline = line.split(cvsSplitBy);
+            saveLine(CSVline);
+        }                               
     }
     
-    public void SaveLine(String[] line){
+    public void saveLine(String[] line){
         this.lines.add(line);
     }
     

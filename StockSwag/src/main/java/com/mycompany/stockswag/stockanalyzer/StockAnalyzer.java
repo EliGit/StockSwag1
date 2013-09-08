@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockanalyzer;
+package com.mycompany.stockswag.stockanalyzer;
 
 
 import java.util.ArrayList;
@@ -21,6 +21,10 @@ public class StockAnalyzer {
     
     public void addStock(Stock s){                        
         this.stocks.add(s);
+    }
+    
+    public List<Stock> getStock(){
+        return this.stocks;
     }
 
     public void printStocks(){
