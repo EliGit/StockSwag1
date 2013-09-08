@@ -19,7 +19,7 @@ public class TickerValidator {
     
     public TickerValidator(List<String> tickers){
         this.tickers = tickers;
-        this.f = new File("ALL");
+        this.f = new File("/all.txt");
         this.reader = new MyFileReader();
         this.reader.loadFile(f);
     }

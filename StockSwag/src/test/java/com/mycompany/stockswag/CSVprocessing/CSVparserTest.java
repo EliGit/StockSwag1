@@ -52,10 +52,10 @@ public class CSVparserTest {
         
     }
     
-    @Test
-    public void parseCSVLinesWorks(){
-        CSVp.loadCSV(testFile);
-        CSVp.parseCSVfile();                
-        assertEquals(line, CSVp.getLines().get(0));
-    }
+//    @Test
+//    public void parseCSVLinesWorks(){
+//        CSVp.loadCSV(testFile);
+//        CSVp.parseCSVfile();                
+//        assertEquals(line, CSVp.getLines().get(0));
+//    }
 }

@@ -26,7 +26,7 @@ public class URLbuilder {
     
     public void buildStringURL(){
         String url_first = "http://finance.yahoo.com/d/quotes.csv?s=";
-        String url_last = "&f=snl1rep5p6";
+        String url_last = "&f=snl1rep5p6=.csv";
         String url_middle = "";
         
         for(String s : this.symbols){

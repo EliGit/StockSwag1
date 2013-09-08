@@ -5,10 +5,8 @@
 package com.mycompany.stockswag.CSVprocessing;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,18 +15,20 @@ import java.util.logging.Logger;
 public class MyFileReader {
     private File file;
     private Scanner scanner;
+    private InputStream is;
+
     
     public MyFileReader(){
         
     }
     
     public void loadFile(File file){
-        this.file = file;
-        try {
-            this.scanner = new Scanner(this.file);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MyFileReader.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.file = file;   
+        String path = this.file.getPath();
+        System.out.println("Trying to open: " + this.file.toString() + " || " + path);
+        this.is = getClass().getResourceAsStream(path);        
+        this.scanner = new Scanner(this.is);
+        
     }
     
     public String readLine(){

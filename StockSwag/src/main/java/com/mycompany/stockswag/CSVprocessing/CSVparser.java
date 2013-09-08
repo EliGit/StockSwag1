@@ -35,6 +35,7 @@ public class CSVparser {
         String cvsSplitBy = ",";        
                   
         MyFileReader fr = new MyFileReader();
+        System.out.println("Passing: " + this.file.getPath());
         fr.loadFile(this.file);                
         
         while (fr.getHasNextLine()) {

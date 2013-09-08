@@ -23,7 +23,7 @@ public class App
                                         
 //offline mode || IGNORE FOR NOW
 //        CSVparser CSVp = new CSVparser();
-//        CSVp.loadCSV(new File("sad"));                
+//        CSVp.loadCSV(new File("/sad.csv"));                
 //        CSVp.parseCSVfile();
 //offline mode 
                 

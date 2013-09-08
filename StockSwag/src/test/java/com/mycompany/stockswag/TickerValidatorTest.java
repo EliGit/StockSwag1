@@ -39,10 +39,10 @@ public class TickerValidatorTest {
         
     }
     
-    @Test
-    public void ConstructorWorks1(){
-        assertEquals(testFile1, tv.getF());
-    }
+//    @Test
+//    public void ConstructorWorks1(){
+//        assertEquals(testFile1, tv.getF());
+//    }
     
     @Test
     public void ValidateTickerWorks(){
