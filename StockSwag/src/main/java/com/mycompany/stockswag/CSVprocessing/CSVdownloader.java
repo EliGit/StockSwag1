@@ -25,14 +25,14 @@ public class CSVdownloader {
     }
     
     public void downloadCSV(){                
-        File f = new File("sad");
+        this.file = new File("CSVResponseFromYahoo.csv");
         try {
             System.out.println("Fetching: " + url.toString());
-            FileUtils.copyURLToFile(url, f);
+            FileUtils.copyURLToFile(url, this.file);
+            System.out.println("data saved to: " + this.file.getPath());
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-        this.file = f;        
+        }                
     }
     
     public File getCSVFile(){

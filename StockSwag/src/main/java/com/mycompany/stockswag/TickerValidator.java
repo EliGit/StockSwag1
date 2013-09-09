@@ -4,33 +4,29 @@
  */
 package com.mycompany.stockswag;
 
-import com.mycompany.stockswag.CSVprocessing.MyFileReader;
-import java.io.File;
+
+
+import java.io.InputStream;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
  * @author EliAir
  */
 public class TickerValidator {
-    private List<String> tickers;
-    private File f;
-    private MyFileReader reader;
+    private List<String> tickers;        
+    private InputStream is;
+    private Scanner scanner;
     
     public TickerValidator(List<String> tickers){
-        this.tickers = tickers;
-        this.f = new File("ALL");
-        this.reader = new MyFileReader();
-        this.reader.loadFile(f);
+        this.tickers = tickers;                                
     }
 
     public List<String> getTickers() {
         return tickers;
     }
 
-    public File getF() {
-        return f;
-    }
     
     public boolean ValidateTickers(){
         boolean isValid = true;
@@ -43,7 +39,18 @@ public class TickerValidator {
         return isValid;
     }
     
-    public boolean ValidateTicker(String ticker){        
-        return this.reader.findString(ticker);
+    public boolean ValidateTicker(String ticker){   
+        System.out.println("Validating: " + ticker);
+        
+        this.is = getClass().getResourceAsStream("/allTickerSymbols.txt");
+        this.scanner = new Scanner(this.is);
+        while(this.scanner.hasNextLine()){
+            if(this.scanner.nextLine().contains(ticker)){
+                this.scanner.close();
+                return true;
+            }
+        }
+        this.scanner.close();
+        return false;
     }
 }
