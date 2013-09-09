@@ -29,7 +29,7 @@ public class CSVdownloader {
         try {
             System.out.println("Fetching: " + url.toString());
             FileUtils.copyURLToFile(url, this.file);
-            System.out.println("data saved to: " + this.file.getPath());
+            System.out.println("Data saved to: " + this.file.getPath());
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }                

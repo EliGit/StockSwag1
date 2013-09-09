@@ -38,7 +38,7 @@ public class StockFactory {
         String eps = this.stockData.get(i)[4].toString();
         String ps = this.stockData.get(i)[5].toString();
         String pb = this.stockData.get(i)[6].toString();   
-                        
+        
         return new Stock(symbol, name, closePrice, pe, eps, ps, pb);
         
     }

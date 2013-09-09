@@ -29,7 +29,10 @@ public class TickerLister {
     
     public void createTickerList(){
         Scanner reader = new Scanner(System.in);
-        System.out.println("Enter stock ticker symbols: ");
+        System.out.println("Enter stock ticker symbols one by one, pressing enter in between. ");
+        System.out.println("When you have selected the stocks you want, hit enter (empty line).");
+        System.out.println("");
+        System.out.println("Stocks:");
                 
         while(true){
             String sym = reader.nextLine();
@@ -44,6 +47,8 @@ public class TickerLister {
         }
         if(!callTickerValidator()){
             System.out.println("Invalid ticker spotted, try again!");
+            System.out.println("");
+            System.out.println("Stocks:");
             this.tickers.clear();
             createTickerList();
         }

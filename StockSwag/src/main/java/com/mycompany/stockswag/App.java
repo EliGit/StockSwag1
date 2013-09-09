@@ -16,6 +16,10 @@ public class App
 {
     public static void main( String[] args )
     {   
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("---------------------StockSwag 0.1 Beta!----------------------");
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("");
         
         //Get tickers as user input
         TickerLister tickerLister = new TickerLister();

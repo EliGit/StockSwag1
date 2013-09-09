@@ -39,9 +39,7 @@ public class TickerValidator {
         return isValid;
     }
     
-    public boolean ValidateTicker(String ticker){   
-        System.out.println("Validating: " + ticker);
-        
+    public boolean ValidateTicker(String ticker){                   
         this.is = getClass().getResourceAsStream("/allTickerSymbols.txt");
         this.scanner = new Scanner(this.is);
         while(this.scanner.hasNextLine()){

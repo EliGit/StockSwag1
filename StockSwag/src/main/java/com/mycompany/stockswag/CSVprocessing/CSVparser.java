@@ -7,6 +7,12 @@ package com.mycompany.stockswag.CSVprocessing;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import au.com.bytecode.opencsv.CSVReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -33,17 +39,22 @@ public class CSVparser {
         String[] CSVline = null;                
         String line = "";
         String cvsSplitBy = ",";        
-                  
-        MyFileReader fr = new MyFileReader();
-        fr.loadFile(this.file);                
-        
-        while (fr.getHasNextLine()) {
-            line = fr.readLine();
-            // use comma as separator                
-            CSVline = line.split(cvsSplitBy);
-            saveLine(CSVline);
-        }                               
-    }
+                                                  
+        CSVReader reader;
+        try {
+            reader = new CSVReader(new FileReader(this.file));                
+            while ((CSVline = reader.readNext()) != null) {
+                // nextLine[] is an array of values from the line 
+                saveLine(CSVline);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CSVparser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CSVparser.class.getName()).log(Level.SEVERE, null, ex);
+        }                                                            
+    }                               
+    
+
     
     public void saveLine(String[] line){
         this.lines.add(line);

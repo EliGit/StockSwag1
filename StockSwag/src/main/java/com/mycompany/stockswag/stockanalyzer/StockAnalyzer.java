@@ -29,11 +29,13 @@ public class StockAnalyzer {
 
     public void printStocks(){
         for(int i = 0; i<this.stocks.size(); i++){
+            System.out.println("");
             System.out.println(this.stocks.get(i).getSymbol() + ", close price: " + this.stocks.get(i).getClosePrice());
             System.out.println("--> P/E: " + this.stocks.get(i).getPe());
             System.out.println("--> EPS: " + this.stocks.get(i).getEps());
             System.out.println("--> PS: "+ this.stocks.get(i).getPs());
             System.out.println("--> PB: " + this.stocks.get(i).getPb());
+            System.out.println("");
         }
     }
     
