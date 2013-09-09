@@ -5,8 +5,6 @@
 package com.mycompany.stockswag.CSVprocessing;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -20,42 +18,36 @@ public class CSVparserTest {
     public CSVparserTest() {
     }
     
-    File testFile = new File("testFile.csv");
+    File testFile = new File("CSVtestFile.csv");
     CSVparser CSVp;
     String aapl = '"' + "AAPL" + '"';
     String aaplinc = '"' + "Apple Inc." + '"';
-    String[] line = {aapl, aaplinc, "498.22", "12.35", "40.106", "2.66", "3.65"};
+    String[] line = {"AAPL", "Apple Inc.", "506.1299","12.42", "40.106", "2.67","3.67"};
     
     @Before
     public void setUp() {
-        CSVp = new CSVparser();
+        CSVp = new CSVparser(testFile);
     }
-    
-
 
     @Test
-    public void ConstructorWorks() {
-        assertEquals(new ArrayList<String[]>(), CSVp.getLines());
+    public void ConstructorLoadsFile() {
+        assertEquals(testFile.getName(), CSVp.getCSV().getName());
     }
-    
-    @Test
-    public void loadCSVWorks(){
-        CSVp.loadCSV(testFile);
-        assertEquals(testFile, CSVp.getCSV());
-    }
-    
+   
+ 
     @Test
     public void saveLineWorks(){
-        CSVp.loadCSV(testFile);
         CSVp.saveLine(line);
         assertEquals(line, CSVp.getLines().get(0));
-        
     }
     
-//    @Test
-//    public void parseCSVLinesWorks(){
-//        CSVp.loadCSV(testFile);
-//        CSVp.parseCSVfile();                
-//        assertEquals(line, CSVp.getLines().get(0));
-//    }
+    @Test
+    public void parseCSVfileWorks(){
+        CSVp.parseCSVfile();
+        
+        
+        assertEquals(line, CSVp.getLines().get(0));
+    }
+    
+
 }

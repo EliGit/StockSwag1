@@ -23,34 +23,58 @@ public class TickerValidatorTest {
     
     TickerValidator tv;
     List<String> testTickers = new ArrayList<String>();
+    
     File testFile1 = new File("/all.txt");
     
     @Before
-    public void setUp() {
+    public void setUp() {       
         testTickers.add("AA");
         testTickers.add("ZF");
         tv = new TickerValidator(testTickers);
     }
     
 
-//    @Test
-//    public void ConstructorWorks2() {
-//        assertEquals(testTickers, tv.getTickers());
-//        
-//    }
+    @Test
+    public void constructorWorks() {
+        assertEquals(testTickers, tv.getTickers());
+        
+    }
+
+    @Test
+    public void validateTickerWorks(){
+        assertEquals(true, tv.ValidateTicker("AA"));
+    }
+    
+    @Test
+    public void validateTickerWorksWithFakeTicker(){
+        assertEquals(false, tv.ValidateTicker("ASDASDASDASD"));
+    }
+    
+    @Test
+    public void validateTickerWorksWithEmptyTicker(){
+        assertEquals(false, tv.ValidateTicker(""));
+    }
 //    
-//    @Test
-//    public void ConstructorWorks1(){
-//        assertEquals(testFile1, tv.getF());
-//    }
+    @Test
+    public void ValidateTickersWorks(){
+        assertEquals(true, tv.ValidateTickers());
+    }
+    
+    @Test
+    public void ValidateTickersWorksWithFakeTickers(){
+        testTickers.add("ASDASDASD");
+        
+        tv = new TickerValidator(testTickers);
+        
+        assertEquals(false, tv.ValidateTickers());
+    }
+    
+    @Test
+    public void ValidateTickersWorksWithEmptyTickers(){
+        testTickers.clear();
+        tv = new TickerValidator(testTickers);
+        assertEquals(false, tv.ValidateTickers());
+    }
 //    
-//    @Test
-//    public void ValidateTickerWorks(){
-//        assertEquals(true, tv.ValidateTicker("AA"));
-//    }
-//    
-//    @Test
-//    public void ValidateTickersWorks(){
-//        assertEquals(true, tv.ValidateTickers());
-//    }
+  
 }

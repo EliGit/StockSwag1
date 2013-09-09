@@ -21,9 +21,7 @@ public class StockFactoryTest {
     }
     StockFactory sf;
     StockAnalyzer sa;
-    String aapl = '"' + "AAPL" + '"';
-    String aaplinc = '"' + "Apple Inc." + '"';
-    String[] line = {aapl, aaplinc, "498.22", "12.35", "40.106", "2.66", "3.65"};
+    String[] line = {"AAPL", "Apple Inc.", "498.22", "12.35", "40.106", "2.66", "3.65"};
     List<String[]> testStockData = new ArrayList<String[]>();
     Stock testStock = new Stock(line[0], line[1], line[2], line[3], line[4], line[5], line[6]);
     

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag;
+package com.mycompany.stockswag.CSVprocessing;
 
+import com.mycompany.stockswag.App;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -18,7 +19,7 @@ public class URLbuilder {
     private List<String> symbols;
     private String stringURL;
     
-    URLbuilder(List<String> symbols) {
+    public URLbuilder(List<String> symbols) {
         this.symbols = symbols;
     }
     

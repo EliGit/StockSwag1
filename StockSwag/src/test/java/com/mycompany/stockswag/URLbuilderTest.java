@@ -4,6 +4,7 @@
  */
 package com.mycompany.stockswag;
 
+import com.mycompany.stockswag.CSVprocessing.URLbuilder;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;

@@ -14,9 +14,11 @@ import java.util.Scanner;
  */
 public class TickerLister {
     private List<String> tickers;
+    private Scanner inputScanner;
     
-    public TickerLister(){
+    public TickerLister(Scanner inputScanner){
         this.tickers = new ArrayList<String>();
+        this.inputScanner = inputScanner;
     }
     
     public List<String> getList(){
@@ -24,18 +26,15 @@ public class TickerLister {
     }
             
     public void addTicker(String ticker){
-        this.tickers.add(ticker);
+        if(!ticker.isEmpty()){
+            this.tickers.add(ticker);
+        }
+        
     }
     
-    public void createTickerList(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter stock ticker symbols one by one, pressing enter in between. ");
-        System.out.println("When you have selected the stocks you want, hit enter (empty line).");
-        System.out.println("");
-        System.out.println("Stocks:");
-                
+    public boolean createTickerList(){
         while(true){
-            String sym = reader.nextLine();
+            String sym = this.inputScanner.nextLine();
             
             if (sym.isEmpty()){                
                 break;
@@ -43,18 +42,17 @@ public class TickerLister {
             this.addTicker(sym);
         }
         if(this.tickers.isEmpty()){
-            return;
+            return false;
         }
-        if(!callTickerValidator()){
-            System.out.println("Invalid ticker spotted, try again!");
-            System.out.println("");
-            System.out.println("Stocks:");
+        if(!validateTickers()){
+            
             this.tickers.clear();
-            createTickerList();
+            return false;
         }
+        return true;
     }
     
-    public boolean callTickerValidator(){
+    public boolean validateTickers(){
         TickerValidator tv = new TickerValidator(this.tickers);
         return tv.ValidateTickers();
     }

@@ -20,29 +20,29 @@ import java.util.logging.Logger;
  * @author EliAir
  */
 public class CSVparser {
-    private File file;
+    private File CSVfile;
     private List<String[]> lines;
     
-    public CSVparser(){
+    public CSVparser(File CSVfile){
         this.lines = new ArrayList<String[]>();
+        this.CSVfile = CSVfile;
     }
     
-    public void loadCSV(File file){
-        this.file = file;
+    public void setCSVfile(File CSVfile){
+        this.CSVfile = CSVfile;
     }
     
     public File getCSV(){
-        return this.file;
+        return this.CSVfile;
     }
     
     public void parseCSVfile(){
-        String[] CSVline = null;                
-        String line = "";
-        String cvsSplitBy = ",";        
-                                                  
+        String[] CSVline = null;
+                                     
         CSVReader reader;
         try {
-            reader = new CSVReader(new FileReader(this.file));                
+            System.out.println("Parsing: " + this.CSVfile.toString());
+            reader = new CSVReader(new FileReader(this.CSVfile));                
             while ((CSVline = reader.readNext()) != null) {
                 // nextLine[] is an array of values from the line 
                 saveLine(CSVline);

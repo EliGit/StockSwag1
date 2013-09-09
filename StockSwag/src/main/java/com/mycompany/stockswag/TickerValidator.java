@@ -29,6 +29,10 @@ public class TickerValidator {
 
     
     public boolean ValidateTickers(){
+        if(this.tickers.isEmpty()){
+            return false;
+        }
+        
         boolean isValid = true;
         for(String s : this.tickers){
             if(!ValidateTicker(s)){
@@ -39,7 +43,11 @@ public class TickerValidator {
         return isValid;
     }
     
-    public boolean ValidateTicker(String ticker){                   
+    public boolean ValidateTicker(String ticker){    
+        if("".equals(ticker)){
+            return false;
+        }
+        
         this.is = getClass().getResourceAsStream("/allTickerSymbols.txt");
         this.scanner = new Scanner(this.is);
         while(this.scanner.hasNextLine()){
