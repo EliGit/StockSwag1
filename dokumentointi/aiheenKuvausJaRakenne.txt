@@ -1,8 +1,13 @@
-Aihe: Osakeanalysoija
+Aihe: Osakeanalysoija (Portfoliomanager?)
 
-StockSwag ohjelma analysoi käyttäjän määrittelemiä esimerkkejä eri rahoituksen menetelmin kuten tunnuslukuanalyysilla. Ohjelma käyttää muutamia eri metriikoita ja määrittelee, ovatko valitut osakkeet yli- vai alihinnoiteltuja. Ohjelma on hyödyllinen käyttäjälle, koska se hakee ja analysoi tietoja, josta pitäisi muuten maksaa tai jota varten pitäisi nähdä jonkin verran vaivaa.
+StockSwag ohjelma analysoi käyttäjän määrittelemiä osakkeita eri rahoituksen menetelmin kuten tunnuslukuanalyysilla. 
+Ohjelma käyttää muutamia eri metriikoita ja määrittelee, ovatko valitut osakkeet yli- vai alihinnoiteltuja. 
+Ohjelma on hyödyllinen käyttäjälle, koska se hakee ja analysoi tietoja, josta pitäisi muuten maksaa 
+tai jota varten pitäisi nähdä jonkin verran vaivaa.
 
-Ohjelma tulee käyttämään Yahoo Finance API rajapintaa, joka kuvaillaan seuraavassa artikkelissa: http://greenido.wordpress.com/2009/12/22/yahoo-finance-hidden-api/. Idea on ladata tarvittavat tiedot CSV tiedostossa ja ohjelma itse tekee tarpeelliset laskutoimitukset datalle ja antaa käyttäjälle tietoja osakkeista.
+Ohjelma tulee käyttämään Yahoo Finance API rajapintaa, joka kuvaillaan seuraavassa artikkelissa: 
+http://greenido.wordpress.com/2009/12/22/yahoo-finance-hidden-api/. 
+Idea on ladata tarvittavat tiedot CSV tiedostossa ja parsia tämä StockSwag ohjelman käyttöön.
 
 
 Käyttäjä: Henkilö 
@@ -10,4 +15,6 @@ Käyttäjä: Henkilö
 Käyttäjän toiminnot:
 
 - Valitse analysoitavat osakkeet.
+(- Valitse miten osakkeet analysoidaan: EV, CAPM, Tunnusluvut: P/S, P/B, P/E, EPS..., ??)
 - Tarkastele osakkeiden analyysia.
+
