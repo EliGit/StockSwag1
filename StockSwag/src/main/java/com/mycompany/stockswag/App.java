@@ -14,7 +14,8 @@ public class App
     public static void main( String[] args )
     {   
         Scanner inputScanner = new Scanner(System.in);
-        UI ui = new UI(inputScanner);
+        StockSwag stockSwag = new StockSwag();        
+        UI ui = new UI(inputScanner, stockSwag);
         ui.run();
     }
 }

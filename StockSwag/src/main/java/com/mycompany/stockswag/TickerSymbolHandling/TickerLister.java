@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag;
+package com.mycompany.stockswag.TickerSymbolHandling;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.Scanner;
  */
 public class TickerLister {
     private List<String> tickers;
-    private Scanner inputScanner;
     
-    public TickerLister(Scanner inputScanner){
+    
+    public TickerLister(){
         this.tickers = new ArrayList<String>();
-        this.inputScanner = inputScanner;
+        
     }
     
     public List<String> getList(){
@@ -32,15 +32,9 @@ public class TickerLister {
         
     }
     
-    public boolean createTickerList(){
-        while(true){
-            String sym = this.inputScanner.nextLine();
-            
-            if (sym.isEmpty()){                
-                break;
-            }
-            this.addTicker(sym);
-        }
+    public boolean createTickerList(List<String> tickers){
+        this.tickers = tickers;
+        
         if(this.tickers.isEmpty()){
             return false;
         }

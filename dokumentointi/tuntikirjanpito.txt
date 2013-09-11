@@ -11,3 +11,6 @@ Lauantai, Sunnuntai 4h
 
 Tiistai 9.9.2013 3h
 - paja: IO jutut ja Maven hyvälle mallille
+
+Keskiviikko 12.9.2013 2h
+- uusi selkeä arkkitehtuuri, ks. class diagram

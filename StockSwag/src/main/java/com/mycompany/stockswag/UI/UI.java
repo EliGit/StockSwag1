@@ -4,14 +4,8 @@
  */
 package com.mycompany.stockswag.UI;
 
-import com.mycompany.stockswag.CSVprocessing.CSVdownloader;
-import com.mycompany.stockswag.CSVprocessing.CSVparser;
-import com.mycompany.stockswag.CSVprocessing.URLbuilder;
-import com.mycompany.stockswag.TickerLister;
-import com.mycompany.stockswag.stockanalyzer.StockAnalyzer;
-import com.mycompany.stockswag.stockanalyzer.StockFactory;
-import java.io.File;
-import java.net.URL;
+import com.mycompany.stockswag.StockSwag;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,83 +15,43 @@ import java.util.Scanner;
  */
 public class UI {
     private Scanner inputScanner;
-    private TickerLister tickerLister;
-    private URLbuilder URLbuilder;
-    private CSVdownloader CSVdownloader;
-    private CSVparser CSVparser;
-    private StockFactory stockFactory;
-    private StockAnalyzer stockAnalyzer;
     private TextUIPrintables tUI;
+    private StockSwag stockSwag;
     
-    public UI(Scanner scanner){
+    public UI(Scanner scanner, StockSwag stockSwag){
         this.inputScanner = scanner;
-        this.tickerLister = new TickerLister(this.inputScanner);
+        this.stockSwag = stockSwag;
+        this.tUI = new TextUIPrintables();
     }
     
     public void run(){
-        this.tUI = new TextUIPrintables();
-        //Print logo
-        this.tUI.printLogo();
+        this.tUI.printLogo();        
         
-        //Ask for tickers until a valid tickerlist exists
         listTickers();
+        this.stockSwag.loadStocks();
+        this.stockSwag.analyzeStocks();
         
-        //build URL
-        runURLbuilder();
-        
-        //downloadCSV from URL
-        downloadCSV(this.URLbuilder.getURL());
-        
-        //parse downloaded CSV
-        parseCSV(this.CSVdownloader.getCSVFile());
-        
-        //build StockAnalyzer and Stocks
-        this.stockAnalyzer = new StockAnalyzer();
-        buildStocks(this.stockAnalyzer, this.CSVparser.getLines());
-        
-        //Analyze!
-        this.stockAnalyzer.printStocks();
-        
-    }
-    
-    public boolean runTickerLister(){
-        //Get tickers as user input
-        return this.tickerLister.createTickerList();
     }
     
     public void listTickers(){
+        List<String> tickers = new ArrayList<String>();
         while(true){
             this.tUI.printGuide1();
-            boolean tickersListed = runTickerLister();
-            if(!tickersListed){
-                this.tUI.printTickerFail();
-            } else {
+            while(true){
+                String s = this.inputScanner.nextLine();
+                if(s.isEmpty()){
+                    break;
+                }
+                tickers.add(s);            
+            }
+            if(this.stockSwag.listTickers(tickers)){
                 break;
-            } 
-        }
+            }
+            this.tUI.printTickerFail();
+        }                                                    
     }
     
     
-    
-    public void runURLbuilder(){
-        this.URLbuilder = new URLbuilder(tickerLister.getList());
-        this.URLbuilder.buildStringURL();
-    }
-    
-    public void parseCSV(File CSVfile){
-        this.CSVparser = new CSVparser(CSVfile);
-        this.CSVparser.parseCSVfile();
-    }
-    
-    public void downloadCSV(URL url){
-        this.CSVdownloader = new CSVdownloader(url);
-        this.CSVdownloader.downloadCSV();
-    }
-    
-    public void buildStocks(StockAnalyzer sa, List<String[]> stockData){
-        this.stockFactory = new StockFactory(stockData, sa);
-        this.stockFactory.buildStocks();
-    }
     
     
 }

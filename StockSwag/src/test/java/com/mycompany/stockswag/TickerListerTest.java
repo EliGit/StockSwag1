@@ -4,6 +4,7 @@
  */
 package com.mycompany.stockswag;
 
+import com.mycompany.stockswag.TickerSymbolHandling.TickerLister;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,11 @@ public class TickerListerTest {
     }
     
     TickerLister tl;
-    private Scanner scanner;
+    
     
     @Before
-    public void setUp() {
-        scanner = new Scanner(System.in);
-        tl = new TickerLister(scanner);
+    public void setUp() {        
+        tl = new TickerLister();
         
     }
     

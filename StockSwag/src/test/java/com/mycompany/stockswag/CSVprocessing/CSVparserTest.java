@@ -4,6 +4,7 @@
  */
 package com.mycompany.stockswag.CSVprocessing;
 
+import com.mycompany.stockswag.StockLoader.CSVparser;
 import java.io.File;
 import org.junit.Before;
 import org.junit.Test;

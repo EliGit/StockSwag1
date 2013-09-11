@@ -4,6 +4,7 @@
  */
 package com.mycompany.stockswag;
 
+import com.mycompany.stockswag.TickerSymbolHandling.TickerValidator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

@@ -30,24 +30,20 @@ public class StockFactoryTest {
     public void setUp() {
         testStockData.add(line);
         sa = new StockAnalyzer();
-        sf = new StockFactory(testStockData, sa);
+        sf = new StockFactory(sa);
     }
 
 
-    @Test
-    public void ConstructorWorks() {        
-        assertEquals(testStockData, sf.getStockData());        
-    }
+    
     
     @Test
-    public void BuildStockWorks(){
-        
-        assertEquals(testStock.StockString(), sf.buildStock(0).StockString());
+    public void BuildStockWorks(){        
+        assertEquals(testStock.StockString(), sf.buildStock(0, testStockData).StockString());
     }
-    
+//    
     @Test
     public void addToStockAnalyzerWorks(){
-        sf.buildStocks();
+        sf.buildStocks(testStockData);
         assertEquals(testStock.StockString(), sa.getStock().get(0).StockString());
     }
     
