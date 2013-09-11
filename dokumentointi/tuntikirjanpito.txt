@@ -1,3 +1,13 @@
 Tiistai 3.9.2013, 2h:
 - Maven säätöä
 - GitHub kikkailua
+
+Torstai 5.9.2013, 6h:
+- All-nighter koululla
+- Mavenia, rakennetta, testejä
+
+Lauantai, Sunnuntai 4h
+- 
+
+Tiistai 9.9.2013 3h
+- paja: IO jutut ja Maven hyvälle mallille
