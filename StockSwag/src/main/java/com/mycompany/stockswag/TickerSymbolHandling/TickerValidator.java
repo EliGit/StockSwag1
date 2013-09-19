@@ -16,8 +16,8 @@ import java.util.Scanner;
  */
 public class TickerValidator {
     private List<String> tickers;        
-    private InputStream is;
-    private Scanner scanner;
+    private InputStream inputStream;
+    private Scanner fileScanner;
     
     public TickerValidator(List<String> tickers){
         this.tickers = tickers;                                
@@ -48,15 +48,15 @@ public class TickerValidator {
             return false;
         }
         
-        this.is = getClass().getResourceAsStream("/allTickerSymbols.txt");
-        this.scanner = new Scanner(this.is);
-        while(this.scanner.hasNextLine()){
-            if(this.scanner.nextLine().contains(ticker)){
-                this.scanner.close();
+        this.inputStream = getClass().getResourceAsStream("/allTickerSymbols.txt");
+        this.fileScanner = new Scanner(this.inputStream);
+        while(this.fileScanner.hasNextLine()){
+            if(this.fileScanner.nextLine().contains(ticker)){
+                this.fileScanner.close();
                 return true;
             }
         }
-        this.scanner.close();
+        this.fileScanner.close();
         return false;
     }
 }

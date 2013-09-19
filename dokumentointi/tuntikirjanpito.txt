@@ -14,3 +14,8 @@ Tiistai 9.9.2013 3h
 
 Keskiviikko 12.9.2013 2h
 - uusi selkeä arkkitehtuuri, ks. class diagram
+
+14.9 3h järkevämpi rakenne, sujuvampaa koodia
+15.9 3h järkevämpi rakenne, sujuvampaa koodia
+
+19.9 2h UML kaavio, tviikkauksia luokkien, muuttujien jne nimiin

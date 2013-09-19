@@ -5,15 +5,10 @@
 package com.mycompany.stockswag;
 
 import com.mycompany.stockswag.TickerSymbolHandling.TickerLister;
-import com.mycompany.stockswag.StockLoader.CSVdownloader;
-import com.mycompany.stockswag.StockLoader.CSVparser;
 import com.mycompany.stockswag.StockLoader.StockLoader;
-import com.mycompany.stockswag.StockLoader.URLbuilder;
 import com.mycompany.stockswag.UI.TextUIPrintables;
 import com.mycompany.stockswag.stockanalyzer.StockAnalyzer;
 import com.mycompany.stockswag.stockanalyzer.StockFactory;
-import java.io.File;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -23,8 +18,7 @@ import java.util.List;
 public class StockSwag {
     private TickerLister tickerLister;            
     private StockFactory stockFactory;
-    private StockAnalyzer stockAnalyzer;
-    private TextUIPrintables tUI;    
+    private StockAnalyzer stockAnalyzer;    
     private StockLoader stockLoader;
     private List<String> tickers;
     

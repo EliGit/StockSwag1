@@ -6,7 +6,6 @@ package com.mycompany.stockswag.TickerSymbolHandling;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -14,11 +13,12 @@ import java.util.Scanner;
  */
 public class TickerLister {
     private List<String> tickers;
+    private TickerValidator tickerValidator;
     
     
     public TickerLister(){
         this.tickers = new ArrayList<String>();
-        
+        this.tickerValidator = new TickerValidator(this.tickers);
     }
     
     public List<String> getList(){
@@ -38,17 +38,11 @@ public class TickerLister {
         if(this.tickers.isEmpty()){
             return false;
         }
-        if(!validateTickers()){
+        if(!this.tickerValidator.ValidateTickers()){
             
             this.tickers.clear();
             return false;
         }
         return true;
-    }
-    
-    public boolean validateTickers(){
-        TickerValidator tv = new TickerValidator(this.tickers);
-        return tv.ValidateTickers();
-    }
-    
+    }           
 }
