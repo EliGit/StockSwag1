@@ -4,6 +4,9 @@
  */
 package com.mycompany.stockswag.stockanalyzer;
 
+import com.mycompany.stockswag.StockAnalyzer.StockAnalyzer;
+import com.mycompany.stockswag.StockAnalyzer.StockFactory;
+import com.mycompany.stockswag.StockAnalyzer.Stock;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

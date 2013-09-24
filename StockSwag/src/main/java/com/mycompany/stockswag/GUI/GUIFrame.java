@@ -5,7 +5,7 @@
 package com.mycompany.stockswag.GUI;
 
 import com.mycompany.stockswag.StockSwag;
-import com.mycompany.stockswag.stockanalyzer.Stock;
+import com.mycompany.stockswag.StockAnalyzer.Stock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.TableColumn;
