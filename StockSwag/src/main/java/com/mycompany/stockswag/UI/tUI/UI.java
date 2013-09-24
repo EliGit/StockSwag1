@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag.UI;
+package com.mycompany.stockswag.UI.tUI;
 
 import com.mycompany.stockswag.StockSwag;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ package com.mycompany.stockswag;
 
 import com.mycompany.stockswag.TickerSymbolHandling.TickerLister;
 import com.mycompany.stockswag.StockLoader.StockLoader;
-import com.mycompany.stockswag.UI.TextUIPrintables;
+import com.mycompany.stockswag.UI.tUI.TextUIPrintables;
 import com.mycompany.stockswag.stockanalyzer.StockAnalyzer;
 import com.mycompany.stockswag.stockanalyzer.StockFactory;
 import java.util.List;
