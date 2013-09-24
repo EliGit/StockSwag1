@@ -42,7 +42,7 @@ public class App
 
         
         
-        Scanner inputScanner = new Scanner(System.in);
+//        Scanner inputScanner = new Scanner(System.in);
         StockSwag stockSwag = new StockSwag();        
         GUIFrame gui = new GUIFrame(stockSwag);
         gui.start(stockSwag);

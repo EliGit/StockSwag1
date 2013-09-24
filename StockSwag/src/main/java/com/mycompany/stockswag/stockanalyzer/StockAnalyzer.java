@@ -23,8 +23,12 @@ public class StockAnalyzer {
         this.stocks.add(s);
     }
     
-    public List<Stock> getStock(){
+    public List<Stock> getStocks(){
         return this.stocks;
+    }
+    
+    public void clearStocks(){
+        this.stocks.clear();
     }
 
     public void printStocks(){
@@ -38,6 +42,8 @@ public class StockAnalyzer {
             System.out.println("");
         }
     }
+    
+    
     
     
 }

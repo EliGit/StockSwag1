@@ -41,7 +41,7 @@ public class CSVparser {
                                      
         CSVReader reader;
         try {
-            System.out.println("Parsing: " + this.CSVfile.toString());
+//            System.out.println("Parsing: " + this.CSVfile.toString());
             reader = new CSVReader(new FileReader(this.CSVfile));                
             while ((CSVline = reader.readNext()) != null) {
                 // nextLine[] is an array of values from the line 

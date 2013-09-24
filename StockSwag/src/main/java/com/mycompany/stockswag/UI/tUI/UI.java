@@ -29,7 +29,7 @@ public class UI {
         
         listTickers();
         this.stockSwag.loadStocks();
-        this.stockSwag.analyzeStocks();
+        this.stockSwag.analyzeAndPrintStocks();
         
     }
     

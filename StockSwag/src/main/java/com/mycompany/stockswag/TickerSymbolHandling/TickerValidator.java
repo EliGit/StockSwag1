@@ -39,7 +39,6 @@ public class TickerValidator {
                 isValid = false;
             }            
         }
-        
         return isValid;
     }
     

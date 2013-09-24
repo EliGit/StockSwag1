@@ -44,7 +44,7 @@ public class StockFactoryTest {
     @Test
     public void addToStockAnalyzerWorks(){
         sf.buildStocks(testStockData);
-        assertEquals(testStock.StockString(), sa.getStock().get(0).StockString());
+        assertEquals(testStock.StockString(), sa.getStocks().get(0).StockString());
     }
     
         

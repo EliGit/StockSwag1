@@ -6,7 +6,7 @@ package com.mycompany.stockswag;
 
 import com.mycompany.stockswag.TickerSymbolHandling.TickerLister;
 import com.mycompany.stockswag.StockLoader.StockLoader;
-import com.mycompany.stockswag.UI.tUI.TextUIPrintables;
+import com.mycompany.stockswag.stockanalyzer.Stock;
 import com.mycompany.stockswag.stockanalyzer.StockAnalyzer;
 import com.mycompany.stockswag.stockanalyzer.StockFactory;
 import java.util.List;
@@ -25,11 +25,11 @@ public class StockSwag {
     public StockSwag(){
         this.stockLoader = new StockLoader();
         this.stockAnalyzer = new StockAnalyzer();
-        this.stockFactory = new StockFactory(this.stockAnalyzer);        
+        this.stockFactory = new StockFactory(this.stockAnalyzer);   
+        this.tickerLister = new TickerLister();
     }
     
     public boolean listTickers(List<String> tickers){
-        this.tickerLister = new TickerLister();
         boolean listed = this.tickerLister.createTickerList(tickers);
         if(listed){
             this.tickers = tickers;
@@ -37,12 +37,17 @@ public class StockSwag {
         return listed;
     }
     
-    public void loadStocks(){        
+    public void loadStocks(){   
+        this.stockAnalyzer.clearStocks();
         this.stockFactory.buildStocks(this.stockLoader.fetchStocks(this.tickers));
     }
     
-    public void analyzeStocks(){
+    public void analyzeAndPrintStocks(){
         this.stockAnalyzer.printStocks();
+    }
+    
+    public List<Stock> getStocks(){
+        return this.stockAnalyzer.getStocks();
     }
     
     
