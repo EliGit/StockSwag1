@@ -264,7 +264,7 @@ public class GUIFrame extends javax.swing.JFrame {
         
         if(a == true){
             this.jTextArea1.append("Fetching stock data!\n");
-      
+            this.stockSwag.clearStocks();
             this.stockSwag.loadStocks();
         } else {
             this.jTextArea1.append("False ticker symbol, try again!\n");

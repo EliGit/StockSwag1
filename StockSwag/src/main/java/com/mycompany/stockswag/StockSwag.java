@@ -36,7 +36,8 @@ public class StockSwag {
         this.tickerLister = new TickerLister();
     }
     /**
-     * Sends user generated ticker symbols to tickerLister
+     * Sends user generated ticker symbols to tickerLister.
+     * Called by GUI when user selects "StockSwag!" functionality
      * 
      * @param tickers A list of ticker symbols from the user
      * @return boolean indicating whether tickers are valid or not
@@ -53,9 +54,20 @@ public class StockSwag {
      * Calls StockLoader to download and parse the stocks and passes them to
      * StockFactory that creates objects out of them
      */
+    
+    
     public void loadStocks(){   
-        this.stockAnalyzer.clearStocks();
+        
         this.stockFactory.buildStocks(this.stockLoader.fetchStocks(this.tickers));
+    }
+    
+    /**
+     * Clears StockAnalyzer's stocklist.
+     * Important when loading new stocks to not have the old ones in the system.
+     */
+    
+    public void clearStocks(){
+        this.stockAnalyzer.clearStocks();
     }
     
     /**
