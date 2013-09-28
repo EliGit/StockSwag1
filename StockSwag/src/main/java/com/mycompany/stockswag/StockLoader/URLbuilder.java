@@ -12,19 +12,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Builds the URL based on the stock ticker symbols.
  * @author EliAir
  */
 public class URLbuilder {
     private List<String> symbols;
     private String stringURL;
     
+    /**
+     * Constructor.
+     * @param symbols List of stock ticker symbols. 
+     */
     public URLbuilder(List<String> symbols) {
         this.symbols = symbols;
     }
     
     //http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snl1rep5p6
     
+    /**
+     * Builds a URL to get the right data from Yahoo as a CSV file.
+     */
     public void buildStringURL(){
         String url_first = "http://finance.yahoo.com/d/quotes.csv?s=";
         String url_last = "&f=snl1rep5p6";

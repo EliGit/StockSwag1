@@ -5,7 +5,7 @@
 package com.mycompany.stockswag.UI.tUI;
 
 /**
- *
+ * Contains printable items for CLI.
  * @author elnygren
  */
 public class TextUIPrintables {

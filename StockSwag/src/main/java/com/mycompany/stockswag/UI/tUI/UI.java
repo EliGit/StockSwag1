@@ -32,7 +32,10 @@ public class UI {
         this.stockSwag.analyzeAndPrintStocks();
         
     }
-    
+    /**
+     * Asks for stock tickers until they are valid.
+     * Also prints messages for user accordingly.
+     */
     public void listTickers(){
         List<String> tickers = new ArrayList<String>();
         while(true){

@@ -9,7 +9,8 @@ import java.net.URL;
 import java.util.List;
 
 /**
- *
+ * Provides URL building, CSV downloading and parsing functionality.
+ * Uses URLbuilder, CSVdownloader and CSVparser.
  * @author EliAir
  */
 public class StockLoader {    
@@ -21,6 +22,11 @@ public class StockLoader {
         
     public StockLoader(){}
     
+    /**
+     * Orders to fetch stockdata from Yahoo Finance as a CSV file and to parse it.
+     * @param tickers List of stock ticker symbols.
+     * @return CSV file's lines as a list.
+     */
     public List<String[]> fetchStocks(List<String> tickers){                               
         //build URL from ticker list
         runURLbuilder(tickers);

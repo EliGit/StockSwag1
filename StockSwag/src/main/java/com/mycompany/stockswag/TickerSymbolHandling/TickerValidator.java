@@ -11,14 +11,19 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ *Validates stock ticker symbols.
+ * Uses a textfile containing over 20k valid stock ticker symbols.
+ * Currently very inefficient, however, still fast enough for this program.
  * @author EliAir
  */
 public class TickerValidator {
     private List<String> tickers;        
     private InputStream inputStream;
     private Scanner fileScanner;
-    
+    /**
+     * Constructor.
+     * @param tickers Stock ticker symbols.
+     */
     public TickerValidator(List<String> tickers){
         this.tickers = tickers;                                
     }
@@ -27,7 +32,10 @@ public class TickerValidator {
         return tickers;
     }
 
-    
+    /**
+     * Validates all stock ticker symbols stored in tickers.
+     * @return True if tickers are valid.
+     */
     public boolean ValidateTickers(){
         if(this.tickers.isEmpty()){
             return false;
@@ -41,7 +49,11 @@ public class TickerValidator {
         }
         return isValid;
     }
-    
+    /**
+     * Validates one stock ticker.
+     * @param ticker Stock ticker symbol.
+     * @return True if the ticker is valid.
+     */
     public boolean ValidateTicker(String ticker){    
         if("".equals(ticker)){
             return false;

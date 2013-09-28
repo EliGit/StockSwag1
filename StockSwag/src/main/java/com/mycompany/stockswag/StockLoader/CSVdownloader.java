@@ -13,17 +13,23 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
- *
+ * Downloads CSV files from Yahoo Finance API.
  * @author EliAir
  */
 public class CSVdownloader {
     private URL url;
     private File file;
-    
+    /**
+     * Constructor.
+     * Requires a URL to download the CSV from.
+     * @param url 
+     */
     public CSVdownloader(URL url){
         this.url = url;        
     }
-    
+    /**
+     * Downloads the CSV file from the URL specified in the attribute.
+     */
     public void downloadCSV(){                
         this.file = new File("CSVResponseFromYahoo.csv");
         try {

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Lists and validates user inputted stock ticker symbols.
+ * Uses TickerValidator for validating.
  * @author EliAir
  */
 public class TickerLister {
@@ -30,7 +31,12 @@ public class TickerLister {
         }
         
     }
-    
+    /**
+     * Creates and validates stock ticker list.
+     * Creates TickerValidator.
+     * @param tickers
+     * @return 
+     */
     public boolean createTickerList(List<String> tickers){
         this.tickers = tickers;
         //validator luodaan tässä, koska sen konstruktori tarvitsee täyden listan

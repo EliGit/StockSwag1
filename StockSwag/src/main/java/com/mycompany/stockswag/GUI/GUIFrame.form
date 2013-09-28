@@ -115,11 +115,21 @@
                   </Group>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace pref="236" max="32767" attributes="0"/>
+=======
+<<<<<<< HEAD
+              <EmptySpace pref="44" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="35" max="32767" attributes="0"/>
+>>>>>>> 4d4661d5171b1862eba58c1b6b6460ec826dbd63
+              <Component id="jTextField9" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+>>>>>>> ced7a082b77068df881f74ee4c5034630eb14a1c
           </Group>
       </Group>
     </DimensionLayout>
