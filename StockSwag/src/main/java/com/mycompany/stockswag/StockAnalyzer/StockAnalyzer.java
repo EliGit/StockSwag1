@@ -2,23 +2,30 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag.stockanalyzer;
+package com.mycompany.stockswag.StockAnalyzer;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Provides functionality for analyzing and keeping track of all stocks.
+ * 
  * @author EliAir
  */
 public class StockAnalyzer {
     private List<Stock> stocks;
     
+    /**
+     * Constructor. Initializes List that holds all the stocks.
+     */
     public StockAnalyzer(){
         this.stocks = new ArrayList<Stock>();
     }
-    
+    /**
+     * Add stocks to list.
+     * @param s 
+     */
     public void addStock(Stock s){                        
         this.stocks.add(s);
     }
@@ -26,11 +33,17 @@ public class StockAnalyzer {
     public List<Stock> getStocks(){
         return this.stocks;
     }
-    
+    /**
+     * Clear the list of all stocks.
+     * This is run when user wants to reset the portfolio.
+     */
     public void clearStocks(){
         this.stocks.clear();
     }
 
+    /**
+     * Prints all data of all stocks to the command line.
+     */
     public void printStocks(){
         for(int i = 0; i<this.stocks.size(); i++){
             System.out.println("");

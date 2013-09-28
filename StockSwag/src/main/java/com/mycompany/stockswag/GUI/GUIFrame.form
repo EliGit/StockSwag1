@@ -96,7 +96,11 @@
                       <Component id="jScrollPane2" min="-2" pref="239" max="-2" attributes="0"/>
                   </Group>
               </Group>
+<<<<<<< HEAD
               <EmptySpace pref="44" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="35" max="32767" attributes="0"/>
+>>>>>>> 4d4661d5171b1862eba58c1b6b6460ec826dbd63
               <Component id="jTextField9" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

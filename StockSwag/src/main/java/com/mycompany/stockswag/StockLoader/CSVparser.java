@@ -16,13 +16,17 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * CSV parsing functionality.
  * @author EliAir
  */
 public class CSVparser {
     private File CSVfile;
     private List<String[]> lines;
     
+    /**
+     * Constructor
+     * @param CSVfile 
+     */
     public CSVparser(File CSVfile){
         this.lines = new ArrayList<String[]>();
         this.CSVfile = CSVfile;
@@ -35,7 +39,9 @@ public class CSVparser {
     public File getCSV(){
         return this.CSVfile;
     }
-    
+    /**
+     * Parses the Yahoo Finance CSV file and saves each line to a list.
+     */
     public void parseCSVfile(){
         String[] CSVline = null;
                                      
@@ -55,7 +61,10 @@ public class CSVparser {
     }                               
     
 
-    
+    /**
+     * Saves one line of data to a list.
+     * @param line Line of data from CSV file.
+     */
     public void saveLine(String[] line){
         this.lines.add(line);
     }

@@ -5,7 +5,7 @@
 package com.mycompany.stockswag.GUI;
 
 import com.mycompany.stockswag.StockSwag;
-import com.mycompany.stockswag.stockanalyzer.Stock;
+import com.mycompany.stockswag.StockAnalyzer.Stock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
@@ -289,7 +289,7 @@ public class GUIFrame extends javax.swing.JFrame {
         
         if(a == true){
             this.jTextArea1.append("Fetching stock data!\n");
-      
+            this.stockSwag.clearStocks();
             this.stockSwag.loadStocks();
         } else {
             this.jTextArea1.append("False ticker symbol, try again!\n");
