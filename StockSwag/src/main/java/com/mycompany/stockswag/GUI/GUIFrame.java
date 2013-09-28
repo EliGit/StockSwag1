@@ -9,6 +9,9 @@ import com.mycompany.stockswag.StockAnalyzer.Stock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.OceanTheme;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -45,12 +48,12 @@ public class GUIFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jTextField9 = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         jButton3 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -72,7 +75,6 @@ public class GUIFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StockSwag");
-        setPreferredSize(new java.awt.Dimension(1000, 695));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Selected Stocks"));
         jPanel2.setToolTipText("Selected Stocks");
@@ -142,6 +144,12 @@ public class GUIFrame extends javax.swing.JFrame {
         jTextArea1.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
         jScrollPane2.setViewportView(jTextArea1);
 
+        jTextField9.setEditable(false);
+        jTextField9.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jTextField9.setForeground(new java.awt.Color(1, 1, 1));
+        jTextField9.setText("Copyright ELN 2013");
+        jTextField9.setBorder(null);
+
         jToolBar1.setRollover(true);
         jToolBar1.setPreferredSize(new java.awt.Dimension(1000, 25));
 
@@ -159,17 +167,6 @@ public class GUIFrame extends javax.swing.JFrame {
         jToolBar1.add(jButton4);
         jToolBar1.add(jSeparator2);
 
-        jButton5.setText("jButton5");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton5);
-
         jMenu3.setText("File");
         jMenuBar1.add(jMenu3);
 
@@ -185,6 +182,9 @@ public class GUIFrame extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 733, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(layout.createSequentialGroup()
+                        .add(22, 22, 22)
+                        .add(jTextField9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -215,23 +215,17 @@ public class GUIFrame extends javax.swing.JFrame {
                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 211, Short.MAX_VALUE)
+                .add(jTextField9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        jPanel2.getAccessibleContext().setAccessibleName("Selected Stocks");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.jTextField1.setText("");
-        this.jTextField2.setText("");
-        this.jTextField3.setText("");
-        this.jTextField4.setText("");
-        this.jTextField5.setText("");
-        this.jTextField6.setText("");
-        this.jTextField7.setText("");     
+    
         this.jTextArea1.setText("");
         this.jTextArea1.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
 
@@ -245,36 +239,20 @@ public class GUIFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         List<String> list = new ArrayList<String>();
-        if(!this.jTextField1.getText().isEmpty()){
-            list.add(jTextField1.getText());
-        }
-        if(!this.jTextField2.getText().isEmpty()){
-            list.add(jTextField2.getText());
-        }
-        if(!this.jTextField3.getText().isEmpty()){
-            list.add(jTextField3.getText());
-        }
-        if(!this.jTextField4.getText().isEmpty()){
-            list.add(jTextField4.getText());
-        }
-        if(!this.jTextField5.getText().isEmpty()){
-            list.add(jTextField5.getText());
-        }
-        if(!this.jTextField6.getText().isEmpty()){
-            list.add(jTextField6.getText());
-        }
-        if(!this.jTextField7.getText().isEmpty()){
-            list.add(jTextField7.getText());
-        }      
+        
         
         boolean a = this.stockSwag.listTickers(list);   
         
         if(a == true){
             this.jTextArea1.append("Fetching stock data!\n");
-            this.stockSwag.clearStocks();
+      
             this.stockSwag.loadStocks();
         } else {
             this.jTextArea1.append("False ticker symbol, try again!\n");
@@ -294,9 +272,9 @@ public class GUIFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jTextField7ActionPerformed
 
     
     public void start(final StockSwag stockSwag) {
@@ -332,7 +310,6 @@ public class GUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -348,6 +325,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
