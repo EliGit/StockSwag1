@@ -8,21 +8,18 @@ import com.mycompany.stockswag.StockSwag;
 import com.mycompany.stockswag.StockAnalyzer.Stock;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.UIManager;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.plaf.metal.OceanTheme;
-import javax.swing.table.TableColumn;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author EliAir
  */
-public class GUIFrame extends javax.swing.JFrame {
+public class StockSwagGUI extends javax.swing.JFrame {
     private StockSwag stockSwag;
     /**
-     * Creates new form GUIFrame
+     * Creates new form StockSwagGUI
      */
-    public GUIFrame(StockSwag stockSwag) {
+    public StockSwagGUI(StockSwag stockSwag) {
         initComponents();
         this.stockSwag = stockSwag;
     }
@@ -39,18 +36,18 @@ public class GUIFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        SelectedStocksPanel = new javax.swing.JPanel();
+        SelectedStocksjScrollPane = new javax.swing.JScrollPane();
+        StockList = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ResetButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTextField9 = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton3 = new javax.swing.JButton();
+        LoadStocksButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
@@ -76,30 +73,30 @@ public class GUIFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StockSwag");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Selected Stocks"));
-        jPanel2.setToolTipText("Selected Stocks");
+        SelectedStocksPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Selected Stocks"));
+        SelectedStocksPanel.setToolTipText("Selected Stocks");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        StockList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList1);
+        SelectedStocksjScrollPane.setViewportView(StockList);
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout SelectedStocksPanelLayout = new org.jdesktop.layout.GroupLayout(SelectedStocksPanel);
+        SelectedStocksPanel.setLayout(SelectedStocksPanelLayout);
+        SelectedStocksPanelLayout.setHorizontalGroup(
+            SelectedStocksPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SelectedStocksPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(SelectedStocksjScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
+        SelectedStocksPanelLayout.setVerticalGroup(
+            SelectedStocksPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SelectedStocksPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .add(SelectedStocksjScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -111,11 +108,11 @@ public class GUIFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Reset");
-        jButton2.setPreferredSize(new java.awt.Dimension(0, 0));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ResetButton.setText("Reset");
+        ResetButton.setPreferredSize(new java.awt.Dimension(0, 0));
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ResetButtonActionPerformed(evt);
             }
         });
 
@@ -153,11 +150,16 @@ public class GUIFrame extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
         jToolBar1.setPreferredSize(new java.awt.Dimension(1000, 25));
 
-        jButton3.setText("jButton3");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        LoadStocksButton.setFocusable(false);
+        LoadStocksButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        LoadStocksButton.setLabel("Load Stocks");
+        LoadStocksButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        LoadStocksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadStocksButtonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(LoadStocksButton);
         jToolBar1.add(jSeparator1);
 
         jButton4.setText("jButton4");
@@ -187,7 +189,7 @@ public class GUIFrame extends javax.swing.JFrame {
                         .add(jTextField9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 643, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +197,7 @@ public class GUIFrame extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(14, 14, 14)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(198, Short.MAX_VALUE))
         );
@@ -210,11 +212,11 @@ public class GUIFrame extends javax.swing.JFrame {
                         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 106, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 211, Short.MAX_VALUE)
                 .add(jTextField9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -223,7 +225,7 @@ public class GUIFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         // TODO add your handling code here:
     
         this.jTextArea1.setText("");
@@ -237,7 +239,7 @@ public class GUIFrame extends javax.swing.JFrame {
         
             
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ResetButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -276,51 +278,44 @@ public class GUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
-    
-    public void start(final StockSwag stockSwag) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-//            UIManager.setLookAndFeel("net.sourceforge.napkinlaf.NapkinLookAndFeel");
-  
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void LoadStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadStocksButtonActionPerformed
+        // TODO add your handling code here:
+        createStockSelectorFrame();
+    }//GEN-LAST:event_LoadStocksButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIFrame(stockSwag).setVisible(true);
+    public static void createStockSelectorFrame()
+    {
+        SwingUtilities.invokeLater(new Runnable()        
+        {
+            @Override
+            public void run()
+            {
+                new StockSelector().setVisible(true);
             }
         });
     }
+        
+        
+                
+            
+            
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LoadStocksButton;
+    private javax.swing.JButton ResetButton;
+    private javax.swing.JPanel SelectedStocksPanel;
+    private javax.swing.JScrollPane SelectedStocksjScrollPane;
+    private javax.swing.JList StockList;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTable jTable1;
