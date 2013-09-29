@@ -4,6 +4,11 @@
  */
 package com.mycompany.stockswag.GUI;
 
+import java.awt.Rectangle;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import javax.swing.text.Document;
+
 /**
  *
  * @author EliAir
@@ -28,6 +33,10 @@ public class StockSelector extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
+        findField = new javax.swing.JTextField();
+        findButton = new javax.swing.JButton();
 
         jLabel1.setText("Select Stocks");
 
@@ -38,29 +47,73 @@ public class StockSelector extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
-                .add(jButton1)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 249, Short.MAX_VALUE)
-                .add(jButton1))
-        );
+        textArea.setEditable(false);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
+        try {       //
+            // Read some text from the resource file to display in
+            // the JTextArea.
+            //
+            textArea.read(new InputStreamReader(
+                getClass().getResourceAsStream("/allTickerSymbols.txt")),
+            null);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 
-        pack();
+    findField.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            findFieldActionPerformed(evt);
+        }
+    });
+
+    findButton.setText("Search");
+    findButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            findButtonActionPerformed(evt);
+        }
+    });
+
+    org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        .add(layout.createSequentialGroup()
+            .addContainerGap()
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(layout.createSequentialGroup()
+                    .add(6, 6, 6)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 426, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 56, Short.MAX_VALUE)
+                    .add(jButton1))
+                .add(layout.createSequentialGroup()
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jLabel1)
+                        .add(layout.createSequentialGroup()
+                            .add(findField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 249, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                            .add(findButton)))
+                    .add(0, 229, Short.MAX_VALUE))))
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        .add(layout.createSequentialGroup()
+            .addContainerGap()
+            .add(jLabel1)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(findField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(findButton))
+            .add(18, 18, 18)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton1)
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 323, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap())))
+    );
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -68,9 +121,69 @@ public class StockSelector extends javax.swing.JFrame {
         StockSelector.super.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void findFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findFieldActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_findFieldActionPerformed
+
+    private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
+        // TODO add your handling code here:
+        // Get the text to find...convert it to lower case for eaiser comparision
+                    int pos = 0;
+                    String find = findField.getText().toLowerCase();
+                    // Focus the text area, otherwise the highlighting won't show up
+                    textArea.requestFocusInWindow();
+                    // Make sure we have a valid search term
+                    if (find != null && find.length() > 0) {
+                        Document document = textArea.getDocument();
+                        int findLength = find.length();
+                        try {
+                            boolean found = false;
+                            // Rest the search position if we're at the end of the document
+                            if (pos + findLength > document.getLength()) {
+                                pos = 0;
+                            }
+                            // While we haven't reached the end...
+                            // "<=" Correction
+                            while (pos + findLength <= document.getLength()) {
+                                // Extract the text from teh docuemnt
+                                String match = document.getText(pos, findLength).toLowerCase();
+                                // Check to see if it matches or request
+                                if (match.equals(find)) {
+                                    found = true;
+                                    break;
+                                }
+                                pos++;
+                            }
+
+                            // Did we find something...
+                            if (found) {
+                                // Get the rectangle of the where the text would be visible...
+                                Rectangle viewRect = textArea.modelToView(pos);
+                                // Scroll to make the rectangle visible
+                                textArea.scrollRectToVisible(viewRect);
+                                // Highlight the text
+                                textArea.setCaretPosition(pos + findLength);
+                                textArea.moveCaretPosition(pos);
+                                // Move the search position beyond the current match
+                                pos += findLength;
+                            }
+
+                        } catch (Exception exp) {
+                            exp.printStackTrace();
+                        }
+
+                    }
+    }//GEN-LAST:event_findButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton findButton;
+    private javax.swing.JTextField findField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }
