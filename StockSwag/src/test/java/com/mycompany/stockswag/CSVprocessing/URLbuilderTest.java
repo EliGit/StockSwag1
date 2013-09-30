@@ -30,13 +30,14 @@ public class URLbuilderTest {
         testSymbols.add("GE");
         testSymbols.add("PTR");
         testSymbols.add("MSFT");
-        URLb = new URLbuilder(testSymbols);
+        URLb = new URLbuilder();
+        URLb.setLatestDataSymbols(testSymbols);
         
     }
 
     @Test
     public void buildStringURLWorks() {
-        URLb.buildStringURL();
-        assertEquals(sURL, URLb.getStringURL());
+        URLb.buildLatestDataStringURL();
+        assertEquals(sURL, URLb.getLatestDataStringURL());
     }
 }

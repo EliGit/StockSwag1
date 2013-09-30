@@ -27,13 +27,13 @@ public class CSVparser {
      * Constructor
      * @param CSVfile 
      */
-    public CSVparser(File CSVfile){
-        this.lines = new ArrayList<String[]>();
-        this.CSVfile = CSVfile;
+    public CSVparser(){
+        this.lines = new ArrayList<String[]>();        
     }
     
     public void setCSVfile(File CSVfile){
         this.CSVfile = CSVfile;
+        this.lines.clear();
     }
     
     public File getCSV(){

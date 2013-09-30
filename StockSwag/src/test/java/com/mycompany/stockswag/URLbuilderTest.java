@@ -6,6 +6,8 @@ package com.mycompany.stockswag;
 
 import com.mycompany.stockswag.StockLoader.URLbuilder;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,19 +32,28 @@ public class URLbuilderTest {
         symbols.add("PTR");
         symbols.add("MSFT");
         
-        URLb = new URLbuilder(symbols);
+        URLb = new URLbuilder();
+        URLb.setLatestDataSymbols(symbols);
     }
     
     @Test
     public void ConstructorWorks(){
-        assertEquals(URLb.getSymbols(), symbols);
+        assertEquals(URLb.getLatestDataSymbols(), symbols);
     }
 
     @Test
     public void BuildStringURLWorks() {
-        URLb.buildStringURL();
-        assertEquals(URLb.getStringURL(), "http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snl1rep5p6");
-    }                
+        URLb.buildLatestDataStringURL();
+        assertEquals(URLb.getLatestDataStringURL(), "http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snl1rep5p6");
+    }            
+    
+    @Test
+    public void buildHistoricalDataStringURLWorks(){
+        http://ichart.finance.yahoo.com/table.csv?s=TSLA&d=8&e=30&f=2013&g=d&a=5&b=29&c=2010&ignore=.csv
+        URLb.buildHistoricalDataStringURL("TSLA");
+        Calendar c = new GregorianCalendar();
+        assertEquals(URLb.getLatestDataStringURL(), "http://ichart.finance.yahoo.com/table.csv?s=TSLA&d="+c.get(Calendar.MONTH+1)+"&e="+c.get(Calendar.DAY_OF_MONTH)+"&f=2013&g=d&a=1&b=1&c=2008&ignore=.csv");
+    }
     
     
 }

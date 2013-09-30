@@ -27,7 +27,8 @@ public class CSVparserTest {
     
     @Before
     public void setUp() {
-        CSVp = new CSVparser(testFile);
+        CSVp = new CSVparser();
+        CSVp.setCSVfile(testFile);
     }
 
     @Test

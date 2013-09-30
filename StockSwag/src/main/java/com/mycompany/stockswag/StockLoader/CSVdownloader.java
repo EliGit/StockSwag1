@@ -17,20 +17,19 @@ import org.apache.commons.io.FileUtils;
  * @author EliAir
  */
 public class CSVdownloader {
-    private URL url;
+    
     private File file;
     /**
      * Constructor.
      * Requires a URL to download the CSV from.
      * @param url 
      */
-    public CSVdownloader(URL url){
-        this.url = url;        
+    public CSVdownloader(){    
     }
     /**
      * Downloads the CSV file from the URL specified in the attribute.
      */
-    public void downloadCSV(){                
+    public void downloadCSV(URL url){                
         this.file = new File("CSVResponseFromYahoo.csv");
         try {
 //            System.out.println("Fetching: " + url.toString());

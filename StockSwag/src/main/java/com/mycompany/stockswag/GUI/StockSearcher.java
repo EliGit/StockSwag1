@@ -13,12 +13,12 @@ import javax.swing.text.Document;
  *
  * @author EliAir
  */
-public class StockSelector extends javax.swing.JFrame {
+public class StockSearcher extends javax.swing.JFrame {
 
     /**
-     * Creates new form StockSelector
+     * Creates new form StockSearcher
      */
-    public StockSelector() {
+    public StockSearcher() {
         initComponents();
     }
 
@@ -38,9 +38,9 @@ public class StockSelector extends javax.swing.JFrame {
         findField = new javax.swing.JTextField();
         findButton = new javax.swing.JButton();
 
-        jLabel1.setText("Select Stocks");
+        jLabel1.setText("Search ticker symbols or company names");
 
-        jButton1.setText("Accept");
+        jButton1.setText("Close");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -85,7 +85,7 @@ public class StockSelector extends javax.swing.JFrame {
                 .add(layout.createSequentialGroup()
                     .add(6, 6, 6)
                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 426, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 56, Short.MAX_VALUE)
+                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 14, Short.MAX_VALUE)
                     .add(jButton1))
                 .add(layout.createSequentialGroup()
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -94,7 +94,7 @@ public class StockSelector extends javax.swing.JFrame {
                             .add(findField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 249, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                             .add(findButton)))
-                    .add(0, 229, Short.MAX_VALUE))))
+                    .add(0, 0, Short.MAX_VALUE))))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -118,7 +118,7 @@ public class StockSelector extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        StockSelector.super.dispose();
+        StockSearcher.super.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void findFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findFieldActionPerformed
