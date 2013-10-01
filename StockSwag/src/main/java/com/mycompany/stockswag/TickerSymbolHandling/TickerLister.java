@@ -19,6 +19,7 @@ public class TickerLister {
     
     public TickerLister(){
         this.tickers = new ArrayList<String>();
+        this.tickerValidator = new TickerValidator();
     }
     
     public List<String> getList(){
@@ -39,9 +40,7 @@ public class TickerLister {
      */
     public boolean createTickerList(List<String> tickers){
         this.tickers = tickers;
-        //validator luodaan tässä, koska sen konstruktori tarvitsee täyden listan
-        //joka taas luodaan tämän metodin ekalla rivillä
-        this.tickerValidator = new TickerValidator(this.tickers);
+        this.tickerValidator.setTickers(tickers);
         
         if(this.tickers.isEmpty()){          
             return false;

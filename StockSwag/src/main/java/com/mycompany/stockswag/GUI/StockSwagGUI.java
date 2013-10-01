@@ -255,7 +255,8 @@ public class StockSwagGUI extends javax.swing.JFrame {
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         // TODO add your handling code here:
-    
+        this.stockSwag.clearStocks();
+        this.stocksymbols.clear();
         this.jTextArea1.setText("");
         this.jTextArea1.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
         DefaultListModel listmodel = (DefaultListModel) this.StockList.getModel();

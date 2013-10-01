@@ -24,8 +24,12 @@ public class TickerValidator {
      * Constructor.
      * @param tickers Stock ticker symbols.
      */
-    public TickerValidator(List<String> tickers){
-        this.tickers = tickers;                                
+    public TickerValidator(){
+     
+    }
+
+    public void setTickers(List<String> tickers) {
+        this.tickers = tickers;
     }
 
     public List<String> getTickers() {
