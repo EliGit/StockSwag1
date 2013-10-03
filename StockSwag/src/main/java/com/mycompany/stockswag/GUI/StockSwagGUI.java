@@ -11,6 +11,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -43,20 +45,25 @@ public class StockSwagGUI extends javax.swing.JFrame {
         SelectedStocksPanel = new javax.swing.JPanel();
         AddField = new javax.swing.JTextField();
         AddButton = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        StockListPane = new javax.swing.JScrollPane();
         StockList = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField9 = new javax.swing.JTextField();
+        PortfolioPane = new javax.swing.JScrollPane();
+        PortfolioTable = new javax.swing.JTable();
+        StatusPane = new javax.swing.JScrollPane();
+        StatusScreen = new javax.swing.JTextArea();
+        copyRightField = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
-        LoadStocksButton = new javax.swing.JButton();
+        SearchStocksButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton2 = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
+        StockAnalysisPane = new javax.swing.JScrollPane();
+        StockAnalysisArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -89,11 +96,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
         });
 
         AddButton.setText("Add");
-        AddButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddButtonMouseClicked(evt);
-            }
-        });
         AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddButtonActionPerformed(evt);
@@ -101,7 +103,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
         });
 
         StockList.setModel(new DefaultListModel());
-        jScrollPane3.setViewportView(StockList);
+        StockListPane.setViewportView(StockList);
 
         org.jdesktop.layout.GroupLayout SelectedStocksPanelLayout = new org.jdesktop.layout.GroupLayout(SelectedStocksPanel);
         SelectedStocksPanel.setLayout(SelectedStocksPanelLayout);
@@ -114,13 +116,13 @@ public class StockSwagGUI extends javax.swing.JFrame {
                         .add(AddField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(AddButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 63, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(StockListPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SelectedStocksPanelLayout.setVerticalGroup(
             SelectedStocksPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(SelectedStocksPanelLayout.createSequentialGroup()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 250, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(StockListPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 250, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(SelectedStocksPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(AddField)
@@ -144,50 +146,36 @@ public class StockSwagGUI extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Name", "Symbol", "Price", "P/E", "EPS", "P/S", "P/B"
-            }
-        ));
-        jTable1.setFocusable(false);
-        jTable1.setRequestFocusEnabled(false);
-        jTable1.setRowSelectionAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        PortfolioTable.setFocusable(false);
+        PortfolioTable.setRequestFocusEnabled(false);
+        PortfolioTable.setRowSelectionAllowed(false);
+        PortfolioPane.setViewportView(PortfolioTable);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
-        jScrollPane2.setViewportView(jTextArea1);
+        StatusScreen.setColumns(20);
+        StatusScreen.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        StatusScreen.setRows(5);
+        StatusScreen.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
+        StatusPane.setViewportView(StatusScreen);
 
-        jTextField9.setEditable(false);
-        jTextField9.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(1, 1, 1));
-        jTextField9.setText("Copyright ELN 2013");
-        jTextField9.setBorder(null);
+        copyRightField.setEditable(false);
+        copyRightField.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        copyRightField.setForeground(new java.awt.Color(1, 1, 1));
+        copyRightField.setText("Copyright ELN 2013");
+        copyRightField.setBorder(null);
 
         jToolBar1.setRollover(true);
         jToolBar1.setPreferredSize(new java.awt.Dimension(1000, 25));
 
-        LoadStocksButton.setText("Search Stocks");
-        LoadStocksButton.setFocusable(false);
-        LoadStocksButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        LoadStocksButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        LoadStocksButton.addActionListener(new java.awt.event.ActionListener() {
+        SearchStocksButton.setText("Search Stocks");
+        SearchStocksButton.setFocusable(false);
+        SearchStocksButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        SearchStocksButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        SearchStocksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoadStocksButtonActionPerformed(evt);
+                SearchStocksButtonActionPerformed(evt);
             }
         });
-        jToolBar1.add(LoadStocksButton);
+        jToolBar1.add(SearchStocksButton);
         jToolBar1.add(jSeparator1);
 
         jButton4.setText("jButton4");
@@ -196,6 +184,24 @@ public class StockSwagGUI extends javax.swing.JFrame {
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton4);
         jToolBar1.add(jSeparator2);
+
+        jButton2.setText("jButton2");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
+        jToolBar1.add(jSeparator3);
+
+        jButton3.setText("jButton3");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton3);
+
+        StockAnalysisArea.setColumns(20);
+        StockAnalysisArea.setRows(5);
+        StockAnalysisArea.setText("Tähän historiallista dataa ylemmäst taulukosta valitusta yksittäisestä osakkeesta. \nDatan hakeminen vahvistetaan käyttäjän toimesta. Hintakehitys, CAPM, Beta laskelmat.\n\nTulossa myös portfolioanalyysi:\n- käyttäjä määrittelee osakkeiden painon (%) portfoliossa \n- tämän perusteella voidaan laskea portfolion riskiä, tuottovaatimusta kunhan \n   ensin lasketaan yksittäisten osakkeiden tuottavaatimus(CAPM) ja Beta.");
+        StockAnalysisPane.setViewportView(StockAnalysisArea);
 
         jMenu3.setText("File");
         jMenuBar1.add(jMenu3);
@@ -213,21 +219,21 @@ public class StockSwagGUI extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 733, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jTextField9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createSequentialGroup()
-                                .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(26, 26, 26)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 643, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 643, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
-                    .add(layout.createSequentialGroup()
                         .add(22, 22, 22)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(162, Short.MAX_VALUE))
+                            .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(copyRightField)
+                            .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(26, 26, 26)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(StatusPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 643, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(PortfolioPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+                            .add(StockAnalysisPane))))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -235,18 +241,24 @@ public class StockSwagGUI extends javax.swing.JFrame {
                 .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(14, 14, 14)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(6, 6, 6)
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 106, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(PortfolioPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(14, 14, 14)
+                        .add(StockAnalysisPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 162, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 158, Short.MAX_VALUE)
-                .add(jTextField9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 187, Short.MAX_VALUE)
+                        .add(copyRightField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(StatusPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 78, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(27, 27, 27)))
                 .addContainerGap())
         );
 
@@ -257,15 +269,12 @@ public class StockSwagGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.stockSwag.clearStocks();
         this.stocksymbols.clear();
-        this.jTextArea1.setText("");
-        this.jTextArea1.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
+        this.StatusScreen.setText("");
+        this.StatusScreen.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
         DefaultListModel listmodel = (DefaultListModel) this.StockList.getModel();
         listmodel.clear();        
-        for(int i=0; i<7; i++){
-            for (int j = 0; j < 7; j++) {
-                this.jTable1.getModel().setValueAt(null, i, j);
-            }
-        }
+        PortfolioTable pt = new PortfolioTable(0);
+        this.PortfolioTable.setModel(pt);
     }//GEN-LAST:event_ResetButtonActionPerformed
 
     private void AddFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFieldActionPerformed
@@ -276,38 +285,43 @@ public class StockSwagGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:        
-        boolean a = this.stockSwag.listTickers(this.stocksymbols);   
-        
-        if(a == true){
-            this.jTextArea1.append("Fetching stock data!\n");
-      
+        if(this.stockSwag.listTickers(this.stocksymbols) == true){
+            this.StatusScreen.append("Fetching stock data!\n");
             this.stockSwag.loadStocks();
+            
+            List<Stock> stocks = this.stockSwag.getStocks();
+            
+            PortfolioTable pt = new PortfolioTable(stocks.size());
+            
+            
+
+            int i = 0;
+            for (Stock s : stocks) {
+                pt.setValueAt(s.getName(), i, 0);
+                pt.setValueAt(s.getSymbol(), i, 1);
+                pt.setValueAt(s.getClosePrice(), i, 2);
+                pt.setValueAt(s.getPe(), i, 3);
+                pt.setValueAt(s.getEps(), i, 4);
+                pt.setValueAt(s.getPs(), i, 5);
+                pt.setValueAt(s.getPb(), i, 6);
+                i++;
+            }
+            this.PortfolioTable.setModel(pt);
         } else {
-            this.jTextArea1.append("False ticker symbol, try again!\n");
+            this.StatusScreen.append("False ticker symbol, try again!\n");
         }
         
-        List<Stock> stocks = this.stockSwag.getStocks();
-        int i = 0;
-        for (Stock s : stocks) {
-            this.jTable1.getModel().setValueAt(s.getName(), i, 0);
-            this.jTable1.getModel().setValueAt(s.getSymbol(), i, 1);
-            this.jTable1.getModel().setValueAt(s.getClosePrice(), i, 2);
-            this.jTable1.getModel().setValueAt(s.getPe(), i, 3);
-            this.jTable1.getModel().setValueAt(s.getEps(), i, 4);
-            this.jTable1.getModel().setValueAt(s.getPs(), i, 5);
-            this.jTable1.getModel().setValueAt(s.getPb(), i, 6);
-            i++;
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
-    private void LoadStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadStocksButtonActionPerformed
+    private void SearchStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchStocksButtonActionPerformed
         // TODO add your handling code here:
         createStockSelectorFrame();
-    }//GEN-LAST:event_LoadStocksButtonActionPerformed
+    }//GEN-LAST:event_SearchStocksButtonActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         // TODO add your handling code here:
@@ -318,10 +332,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
         this.AddField.setText("");
         
     }//GEN-LAST:event_AddButtonActionPerformed
-
-    private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddButtonMouseClicked
 
     public static void createStockSelectorFrame()
     {
@@ -343,11 +353,21 @@ public class StockSwagGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
     private javax.swing.JTextField AddField;
-    private javax.swing.JButton LoadStocksButton;
+    private javax.swing.JScrollPane PortfolioPane;
+    private javax.swing.JTable PortfolioTable;
     private javax.swing.JButton ResetButton;
+    private javax.swing.JButton SearchStocksButton;
     private javax.swing.JPanel SelectedStocksPanel;
+    private javax.swing.JScrollPane StatusPane;
+    private javax.swing.JTextArea StatusScreen;
+    private javax.swing.JTextArea StockAnalysisArea;
+    private javax.swing.JScrollPane StockAnalysisPane;
     private javax.swing.JList StockList;
+    private javax.swing.JScrollPane StockListPane;
+    private javax.swing.JTextField copyRightField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -355,14 +375,9 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

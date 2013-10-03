@@ -20,3 +20,9 @@ Keskiviikko 12.9.2013 2h
 
 19.9 2h UML kaavio, tviikkauksia luokkien, muuttujien jne nimiin
 25.9 4h GUI, Javadoc
+
+27.9 fixailua, lisätoiminnallisuuden suunnittelua 3-4h
+28.9 fixailua, lisätoiminnallisuuden suunnittelua 3-4h
+
+1.10 lisätoiminnallisuuden toteutuksen aloittaminen 2h
+2.10 lisätoiminnallisuuden toteutuksen aloittaminen 3h

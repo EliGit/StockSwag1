@@ -128,53 +128,35 @@ public class StockSearcher extends javax.swing.JFrame {
     }//GEN-LAST:event_findFieldActionPerformed
 
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
-        // TODO add your handling code here:
-        // Get the text to find...convert it to lower case for eaiser comparision
-                    int pos = 0;
-                    String find = findField.getText().toLowerCase();
-                    // Focus the text area, otherwise the highlighting won't show up
-                    textArea.requestFocusInWindow();
-                    // Make sure we have a valid search term
-                    if (find != null && find.length() > 0) {
-                        Document document = textArea.getDocument();
-                        int findLength = find.length();
-                        try {
-                            boolean found = false;
-                            // Rest the search position if we're at the end of the document
-                            if (pos + findLength > document.getLength()) {
-                                pos = 0;
-                            }
-                            // While we haven't reached the end...
-                            // "<=" Correction
-                            while (pos + findLength <= document.getLength()) {
-                                // Extract the text from teh docuemnt
-                                String match = document.getText(pos, findLength).toLowerCase();
-                                // Check to see if it matches or request
-                                if (match.equals(find)) {
-                                    found = true;
-                                    break;
-                                }
-                                pos++;
-                            }
-
-                            // Did we find something...
-                            if (found) {
-                                // Get the rectangle of the where the text would be visible...
-                                Rectangle viewRect = textArea.modelToView(pos);
-                                // Scroll to make the rectangle visible
-                                textArea.scrollRectToVisible(viewRect);
-                                // Highlight the text
-                                textArea.setCaretPosition(pos + findLength);
-                                textArea.moveCaretPosition(pos);
-                                // Move the search position beyond the current match
-                                pos += findLength;
-                            }
-
-                        } catch (Exception exp) {
-                            exp.printStackTrace();
-                        }
-
+         
+        String searchTerm = findField.getText().toLowerCase();
+        textArea.requestFocusInWindow();
+        if (searchTerm != null && searchTerm.length() > 0) {
+            Document document = textArea.getDocument();
+            int searchTermLength = searchTerm.length();
+            try {
+                boolean found = false;
+                int position = 0;
+                while (position + searchTermLength <= document.getLength()) {
+                    String match = document.getText(position, searchTermLength).toLowerCase();
+                    if (match.equals(searchTerm)) {
+                        found = true;
+                        break;
                     }
+                    position++;
+                }
+                if (found) {
+                    Rectangle viewRect = textArea.modelToView(position);
+                    textArea.scrollRectToVisible(viewRect);
+                    textArea.setCaretPosition(position + searchTermLength);
+                    textArea.moveCaretPosition(position);
+                    position += searchTermLength;
+                }
+            } catch (Exception exp) {
+                exp.printStackTrace();
+            }
+
+        }
     }//GEN-LAST:event_findButtonActionPerformed
 
 
