@@ -2,8 +2,6 @@ package com.mycompany.stockswag;
 
 import com.mycompany.stockswag.GUI.GUI;
 import com.mycompany.stockswag.GUI.StockSwagGUI;
-import com.mycompany.stockswag.UI.tUI.UI;
-import java.util.Scanner;
 import javax.swing.SwingUtilities;
 //import com.mycompany.stockswag.UI.tUI.UI;
 //import java.util.Scanner;
@@ -47,18 +45,12 @@ public class App
             java.util.logging.Logger.getLogger(StockSwagGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 //        //</editor-fold>
-//        
-//        
-//   GUI    
-        /* Create and display the form */        
-//        
+     
+        /* Create and display the form */                
         GUI gui = new GUI(stockSwag);
         SwingUtilities.invokeLater(gui);
         
 
-        
-        
-        
 //  CLI       
 //        Scanner inputScanner = new Scanner(System.in);                               
 //        UI ui = new UI(inputScanner, stockSwag);

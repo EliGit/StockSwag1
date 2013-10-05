@@ -31,31 +31,31 @@ public class StockSearcher extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textArea = new javax.swing.JTextArea();
+        instructionsLabel = new javax.swing.JLabel();
+        closeButton = new javax.swing.JButton();
+        symbolDataScrollPane = new javax.swing.JScrollPane();
+        symbolDataArea = new javax.swing.JTextArea();
         findField = new javax.swing.JTextField();
         findButton = new javax.swing.JButton();
 
-        jLabel1.setText("Search ticker symbols or company names");
+        instructionsLabel.setText("Search ticker symbols or company names");
 
-        jButton1.setText("Close");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                closeButtonActionPerformed(evt);
             }
         });
 
-        textArea.setEditable(false);
-        textArea.setColumns(20);
-        textArea.setRows(5);
-        jScrollPane1.setViewportView(textArea);
+        symbolDataArea.setEditable(false);
+        symbolDataArea.setColumns(20);
+        symbolDataArea.setRows(5);
+        symbolDataScrollPane.setViewportView(symbolDataArea);
         try {       //
             // Read some text from the resource file to display in
             // the JTextArea.
             //
-            textArea.read(new InputStreamReader(
+            symbolDataArea.read(new InputStreamReader(
                 getClass().getResourceAsStream("/allTickerSymbols.txt")),
             null);
     } catch (IOException e) {
@@ -84,12 +84,12 @@ public class StockSearcher extends javax.swing.JFrame {
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(layout.createSequentialGroup()
                     .add(6, 6, 6)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 426, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(symbolDataScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 426, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 14, Short.MAX_VALUE)
-                    .add(jButton1))
+                    .add(closeButton))
                 .add(layout.createSequentialGroup()
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jLabel1)
+                        .add(instructionsLabel)
                         .add(layout.createSequentialGroup()
                             .add(findField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 249, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -100,39 +100,46 @@ public class StockSearcher extends javax.swing.JFrame {
         layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
         .add(layout.createSequentialGroup()
             .addContainerGap()
-            .add(jLabel1)
+            .add(instructionsLabel)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                 .add(findField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(findButton))
             .add(18, 18, 18)
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton1)
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, closeButton)
                 .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 323, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(symbolDataScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 323, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())))
     );
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Closes the StockSearcher jFrame window.
+     * @param evt 
+     */
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        //close the window:
         StockSearcher.super.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_closeButtonActionPerformed
 
     private void findFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findFieldActionPerformed
         // TODO add your handling code here:
-        
-        
+        findButtonActionPerformed(evt);
     }//GEN-LAST:event_findFieldActionPerformed
 
+    /**
+     * Searches matching pattern from symbolDataArea for the string in findField.
+     * @param evt 
+     */
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
          
         String searchTerm = findField.getText().toLowerCase();
-        textArea.requestFocusInWindow();
+        symbolDataArea.requestFocusInWindow();
         if (searchTerm != null && searchTerm.length() > 0) {
-            Document document = textArea.getDocument();
+            Document document = symbolDataArea.getDocument();
             int searchTermLength = searchTerm.length();
             try {
                 boolean found = false;
@@ -146,10 +153,10 @@ public class StockSearcher extends javax.swing.JFrame {
                     position++;
                 }
                 if (found) {
-                    Rectangle viewRect = textArea.modelToView(position);
-                    textArea.scrollRectToVisible(viewRect);
-                    textArea.setCaretPosition(position + searchTermLength);
-                    textArea.moveCaretPosition(position);
+                    Rectangle viewRect = symbolDataArea.modelToView(position);
+                    symbolDataArea.scrollRectToVisible(viewRect);
+                    symbolDataArea.setCaretPosition(position + searchTermLength);
+                    symbolDataArea.moveCaretPosition(position);
                     position += searchTermLength;
                 }
             } catch (Exception exp) {
@@ -161,11 +168,11 @@ public class StockSearcher extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeButton;
     private javax.swing.JButton findButton;
     private javax.swing.JTextField findField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea textArea;
+    private javax.swing.JLabel instructionsLabel;
+    private javax.swing.JTextArea symbolDataArea;
+    private javax.swing.JScrollPane symbolDataScrollPane;
     // End of variables declaration//GEN-END:variables
 }

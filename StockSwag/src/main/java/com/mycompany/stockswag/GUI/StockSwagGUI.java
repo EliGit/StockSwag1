@@ -4,15 +4,13 @@
  */
 package com.mycompany.stockswag.GUI;
 
-import com.mycompany.stockswag.StockSwag;
+
 import com.mycompany.stockswag.StockAnalyzer.Stock;
+import com.mycompany.stockswag.StockSwag;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -47,7 +45,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         StockListPane = new javax.swing.JScrollPane();
         StockList = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        loadStocksButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
         PortfolioPane = new javax.swing.JScrollPane();
         PortfolioTable = new javax.swing.JTable();
@@ -130,11 +128,11 @@ public class StockSwagGUI extends javax.swing.JFrame {
                 .add(11, 11, 11))
         );
 
-        jButton1.setText("Load Stocks");
-        jButton1.setPreferredSize(new java.awt.Dimension(0, 0));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loadStocksButton.setText("Load Stocks");
+        loadStocksButton.setPreferredSize(new java.awt.Dimension(0, 0));
+        loadStocksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loadStocksButtonActionPerformed(evt);
             }
         });
 
@@ -222,7 +220,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
                         .add(22, 22, 22)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(loadStocksButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
@@ -250,7 +248,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(loadStocksButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 187, Short.MAX_VALUE)
@@ -283,7 +281,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
         this.AddField.setText("");
     }//GEN-LAST:event_AddFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loadStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadStocksButtonActionPerformed
         // TODO add your handling code here:        
         if(this.stockSwag.listTickers(this.stocksymbols) == true){
             this.StatusScreen.append("Fetching stock data!\n");
@@ -312,15 +310,11 @@ public class StockSwagGUI extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_loadStocksButtonActionPerformed
 
     private void SearchStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchStocksButtonActionPerformed
         // TODO add your handling code here:
-        createStockSelectorFrame();
+        createStockSearcherFrame();
     }//GEN-LAST:event_SearchStocksButtonActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
@@ -333,7 +327,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_AddButtonActionPerformed
 
-    public static void createStockSelectorFrame()
+    public void createStockSearcherFrame()
     {
         SwingUtilities.invokeLater(new Runnable()        
         {
@@ -365,7 +359,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private javax.swing.JList StockList;
     private javax.swing.JScrollPane StockListPane;
     private javax.swing.JTextField copyRightField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -379,5 +372,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton loadStocksButton;
     // End of variables declaration//GEN-END:variables
 }
