@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag.StockAnalyzer;
+package com.mycompany.stockswag.StockManager;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class StockFactory {
     
-    private StockAnalyzer stockAnalyzer;
+    private StockManager stockAnalyzer;
     
     /**
      * Costructor.
      * @param stockAnalyzer 
      */
-    public StockFactory(StockAnalyzer stockAnalyzer){
+    public StockFactory(StockManager stockAnalyzer){
         this.stockAnalyzer = stockAnalyzer;
     
     }

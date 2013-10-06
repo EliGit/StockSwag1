@@ -28,7 +28,7 @@ public class UI {
         this.tUI.printLogo();        
         
         listTickers();
-        this.stockSwag.loadStocks();
+        this.stockSwag.downloadStocks();
         this.stockSwag.analyzeAndPrintStocks();
         
     }

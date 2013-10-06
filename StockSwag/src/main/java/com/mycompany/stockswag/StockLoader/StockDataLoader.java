@@ -10,24 +10,26 @@ import java.util.List;
 
 /**
  * Provides URL building, CSV downloading and parsing functionality.
- * Uses URLbuilder, CSVdownloader and CSVparser.
+ * Uses URLbuilder, CSVdownloader and LatestDataParser.
  * @author EliAir
  */
 public class StockDataLoader {    
     
     private URLbuilder URLbuilder;
     private CSVdownloader CSVdownloader;
-    private CSVparser CSVparser;        
+    private LatestDataParser latestDataParser;    
+    private HistoricalDataParser historicalDataParser;
     
         
     public StockDataLoader(){
         this.URLbuilder = new URLbuilder();        
         this.CSVdownloader = new CSVdownloader();
-        this.CSVparser = new CSVparser();
+        this.latestDataParser = new LatestDataParser();
+        this.historicalDataParser = new HistoricalDataParser();
     }
     
     /**
-     * Orders to fetch stockdata from Yahoo Finance as a CSV file and to parse it.
+     * Fetches the given stocks from Yahoo as a CSV file and returns them parsed in a List<String[]> structure.
      * @param tickers List of stock ticker symbols.
      * @return CSV file's lines as a list.
      */
@@ -36,23 +38,32 @@ public class StockDataLoader {
         buildURLFromTickers(tickers);
     
         //downloadCSV from URL
-        downloadCSV(this.URLbuilder.getURL());
+        this.CSVdownloader.downloadCSV(this.URLbuilder.getURL(), "LatestStockDataFromYahoo.csv");
+        
     
         //parse downloaded CSV
-        parseCSV(this.CSVdownloader.getCSVFile());
+        parseLatestData(this.CSVdownloader.getCSVFile());
         
         //return stockData
-        return this.CSVparser.getLines();
+        return this.latestDataParser.getLines();
     }
     
-    public List<String[]> fetchHistoricalStockData(String symbol){
+        /**
+         * Fetches the given stock from Yahoo as a CSV file and returns its historical data parsed in a List<String[]> structure.
+         * @param symbol
+         * @return 
+         */
+    public List<String[]> fetchHistoricalStockData(String symbol, int id){
+         //build URL from ticker list
         buildHistoricalDataURL(symbol);
-        this.URLbuilder.buildHistoricalDataStringURL(symbol);
         
-        downloadCSV(this.URLbuilder.getURL());
-        parseCSV(this.CSVdownloader.getCSVFile());
+        //downloadCSV from URL
+        this.CSVdownloader.downloadCSV(this.URLbuilder.getURL(), "HistoricalStockDataFromYahoo" + id + ".csv");
+                
+        //parse downloaded CSV
+        parseHistoricalData(this.CSVdownloader.getCSVFile());
         
-        return this.CSVparser.getLines();
+        return this.historicalDataParser.getLines();
         
     }
     
@@ -66,16 +77,30 @@ public class StockDataLoader {
         this.URLbuilder.buildLatestDataStringURL();
     }
     
-    public void parseCSV(File CSVfile){    
+    public void parseLatestData(File CSVfile){    
         
-        this.CSVparser.setCSVfile(CSVfile);
-        this.CSVparser.parseCSVfile();
+        this.latestDataParser.setCSVfile(CSVfile);
+        this.latestDataParser.parseCSVfile();
     }
     
-    public void downloadCSV(URL url){
-        
-        this.CSVdownloader.downloadCSV(url);
+    public void parseHistoricalData(File CSVfile){
+
+        this.historicalDataParser.setCSVfile(CSVfile);
+        this.historicalDataParser.parseCSVfile();
     }
+    
+    public List<String[]> fetchHistoricalStockDataFromFile(File file){                                                
+        //parse given CSV
+        parseHistoricalData(file);        
+        return this.historicalDataParser.getLines();        
+    }
+    
+    public List<String[]> fetchLatestStockDataFromFile(File file){                                                
+        //parse given CSV
+        parseLatestData(file);        
+        return this.latestDataParser.getLines();        
+    }
+    
     
     
 }

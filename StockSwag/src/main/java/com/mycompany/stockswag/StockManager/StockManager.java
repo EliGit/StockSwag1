@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag.StockAnalyzer;
+package com.mycompany.stockswag.StockManager;
 
 
 import java.util.ArrayList;
@@ -13,13 +13,13 @@ import java.util.List;
  * 
  * @author EliAir
  */
-public class StockAnalyzer {
+public class StockManager {
     private List<Stock> stocks;
     
     /**
      * Constructor. Initializes List that holds all the stocks.
      */
-    public StockAnalyzer(){
+    public StockManager(){
         this.stocks = new ArrayList<Stock>();
     }
     /**
@@ -53,10 +53,9 @@ public class StockAnalyzer {
             System.out.println("--> PS: "+ this.stocks.get(i).getPs());
             System.out.println("--> PB: " + this.stocks.get(i).getPb());
             System.out.println("");
+            System.out.println(this.stocks.get(i).getHistoricalData().get(0)[1]);
+            System.out.println(this.stocks.get(i).getHistoricalData().get(1)[1]);
+            System.out.println(this.stocks.get(i).getHistoricalData().get(2)[1]);
         }
-    }
-    
-    
-    
-    
+    }    
 }

@@ -29,12 +29,12 @@ public class CSVdownloader {
     /**
      * Downloads the CSV file from the URL specified in the attribute.
      */
-    public void downloadCSV(URL url){                
-        this.file = new File("CSVResponseFromYahoo.csv");
+    public void downloadCSV(URL url, String filename){                
+        this.file = new File(filename);
         try {
-//            System.out.println("Fetching: " + url.toString());
+            System.out.println("Fetching: " + url.toString());
             FileUtils.copyURLToFile(url, this.file);
-//            System.out.println("Data saved to: " + this.file.getPath());
+            System.out.println("Data saved to: " + this.file.getPath());
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }                

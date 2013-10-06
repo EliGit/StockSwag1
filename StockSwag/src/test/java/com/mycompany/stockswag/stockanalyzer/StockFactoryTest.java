@@ -4,9 +4,9 @@
  */
 package com.mycompany.stockswag.stockanalyzer;
 
-import com.mycompany.stockswag.StockAnalyzer.StockAnalyzer;
-import com.mycompany.stockswag.StockAnalyzer.StockFactory;
-import com.mycompany.stockswag.StockAnalyzer.Stock;
+import com.mycompany.stockswag.StockManager.StockManager;
+import com.mycompany.stockswag.StockManager.StockFactory;
+import com.mycompany.stockswag.StockManager.Stock;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -23,7 +23,7 @@ public class StockFactoryTest {
     public StockFactoryTest() {
     }
     StockFactory sf;
-    StockAnalyzer sa;
+    StockManager sa;
     String[] line = {"AAPL", "Apple Inc.", "498.22", "12.35", "40.106", "2.66", "3.65"};
     List<String[]> testStockData = new ArrayList<String[]>();
     Stock testStock = new Stock(line[0], line[1], line[2], line[3], line[4], line[5], line[6]);
@@ -32,7 +32,7 @@ public class StockFactoryTest {
     @Before
     public void setUp() {
         testStockData.add(line);
-        sa = new StockAnalyzer();
+        sa = new StockManager();
         sf = new StockFactory(sa);
     }
 

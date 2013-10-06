@@ -12,13 +12,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author EliAir
  */
-public class PortfolioTable extends AbstractTableModel {
+public class PortfolioTableDataModel extends AbstractTableModel {
     private int rows;
     private int cols;
     private List<String[]> table;
     private String[] columnNames;
     
-    public PortfolioTable(int rows){
+    public PortfolioTableDataModel(int rows){
         this.cols = 7;
         this.rows = rows;
         this.table = new LinkedList<String[]>();

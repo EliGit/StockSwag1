@@ -5,12 +5,16 @@
 package com.mycompany.stockswag.GUI;
 
 
-import com.mycompany.stockswag.StockAnalyzer.Stock;
+import com.mycompany.stockswag.StockManager.Stock;
 import com.mycompany.stockswag.StockSwag;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -19,6 +23,7 @@ import javax.swing.SwingUtilities;
 public class StockSwagGUI extends javax.swing.JFrame {
     private StockSwag stockSwag;
     private List<String> stocksymbols;
+    private List<Stock> stocks;
     /**
      * Creates new form StockSwagGUI
      */
@@ -26,6 +31,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
         initComponents();
         this.stockSwag = stockSwag;
         this.stocksymbols = new ArrayList<String>();
+        this.stocks = new ArrayList<Stock>();
     }
 
     /**
@@ -62,8 +68,11 @@ public class StockSwagGUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         StockAnalysisPane = new javax.swing.JScrollPane();
         StockAnalysisArea = new javax.swing.JTextArea();
+        AnalyzeButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
+        openStocksMenuItem = new javax.swing.JMenuItem();
+        openHistoricalDataMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
@@ -201,7 +210,31 @@ public class StockSwagGUI extends javax.swing.JFrame {
         StockAnalysisArea.setText("Tähän historiallista dataa ylemmäst taulukosta valitusta yksittäisestä osakkeesta. \nDatan hakeminen vahvistetaan käyttäjän toimesta. Hintakehitys, CAPM, Beta laskelmat.\n\nTulossa myös portfolioanalyysi:\n- käyttäjä määrittelee osakkeiden painon (%) portfoliossa \n- tämän perusteella voidaan laskea portfolion riskiä, tuottovaatimusta kunhan \n   ensin lasketaan yksittäisten osakkeiden tuottavaatimus(CAPM) ja Beta.");
         StockAnalysisPane.setViewportView(StockAnalysisArea);
 
+        AnalyzeButton.setText("Analyze");
+        AnalyzeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnalyzeButtonActionPerformed(evt);
+            }
+        });
+
         jMenu3.setText("File");
+
+        openStocksMenuItem.setText("Open Stocks");
+        openStocksMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openStocksMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(openStocksMenuItem);
+
+        openHistoricalDataMenuItem.setText("Open Historical Data");
+        openHistoricalDataMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openHistoricalDataMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(openHistoricalDataMenuItem);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Edit");
@@ -219,14 +252,20 @@ public class StockSwagGUI extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(22, 22, 22)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(loadStocksButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(loadStocksButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(AnalyzeButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
-                        .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(copyRightField)
-                            .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .add(26, 26, 26)
+                            .add(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                    .add(copyRightField)
+                                    .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .add(26, 26, 26))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(55, 55, 55)))
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(StatusPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 643, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(PortfolioPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
@@ -246,17 +285,16 @@ public class StockSwagGUI extends javax.swing.JFrame {
                         .add(StockAnalysisPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 162, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(SelectedStocksPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(loadStocksButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(AnalyzeButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 107, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(loadStocksButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(ResetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 187, Short.MAX_VALUE)
+                        .add(51, 51, 51)
                         .add(copyRightField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(StatusPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 78, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(27, 27, 27)))
+                    .add(StatusPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 78, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -269,9 +307,10 @@ public class StockSwagGUI extends javax.swing.JFrame {
         this.stocksymbols.clear();
         this.StatusScreen.setText("");
         this.StatusScreen.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
+        this.StockAnalysisArea.setText("Tähän historiallista dataa ylemmäst taulukosta valitusta yksittäisestä osakkeesta. \nDatan hakeminen vahvistetaan käyttäjän toimesta. Hintakehitys, CAPM, Beta laskelmat.\n\nTulossa myös portfolioanalyysi:\n- käyttäjä määrittelee osakkeiden painon (%) portfoliossa \n- tämän perusteella voidaan laskea portfolion riskiä, tuottovaatimusta kunhan \n   ensin lasketaan yksittäisten osakkeiden tuottavaatimus(CAPM) ja Beta.");
         DefaultListModel listmodel = (DefaultListModel) this.StockList.getModel();
         listmodel.clear();        
-        PortfolioTable pt = new PortfolioTable(0);
+        PortfolioTableDataModel pt = new PortfolioTableDataModel(0);
         this.PortfolioTable.setModel(pt);
     }//GEN-LAST:event_ResetButtonActionPerformed
 
@@ -285,26 +324,9 @@ public class StockSwagGUI extends javax.swing.JFrame {
         // TODO add your handling code here:        
         if(this.stockSwag.listTickers(this.stocksymbols) == true){
             this.StatusScreen.append("Fetching stock data!\n");
-            this.stockSwag.loadStocks();
+            this.stockSwag.downloadStocks();
+            openPortfolioInJTable();
             
-            List<Stock> stocks = this.stockSwag.getStocks();
-            
-            PortfolioTable pt = new PortfolioTable(stocks.size());
-            
-            
-
-            int i = 0;
-            for (Stock s : stocks) {
-                pt.setValueAt(s.getName(), i, 0);
-                pt.setValueAt(s.getSymbol(), i, 1);
-                pt.setValueAt(s.getClosePrice(), i, 2);
-                pt.setValueAt(s.getPe(), i, 3);
-                pt.setValueAt(s.getEps(), i, 4);
-                pt.setValueAt(s.getPs(), i, 5);
-                pt.setValueAt(s.getPb(), i, 6);
-                i++;
-            }
-            this.PortfolioTable.setModel(pt);
         } else {
             this.StatusScreen.append("False ticker symbol, try again!\n");
         }
@@ -327,6 +349,43 @@ public class StockSwagGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_AddButtonActionPerformed
 
+    private void AnalyzeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyzeButtonActionPerformed
+        // TODO add your handling code here:
+        this.stockSwag.downloadHistoricalData();
+        setListenerToJTableAfterAnalysis();
+        
+    }//GEN-LAST:event_AnalyzeButtonActionPerformed
+
+    private void openStocksMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openStocksMenuItemActionPerformed
+        //Create a file chooser
+        final JFileChooser fc = new JFileChooser();
+        //In response to a button click:
+        int returnVal = fc.showOpenDialog(StockSwagGUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            System.out.println("Loading stocks from file: " + file);
+            this.stockSwag.loadStocksFromFile(file);
+            openPortfolioInJTable();
+            } 
+        
+    }//GEN-LAST:event_openStocksMenuItemActionPerformed
+
+    private void openHistoricalDataMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openHistoricalDataMenuItemActionPerformed
+        // TODO add your handling code here:
+        //Create a file chooser
+        final JFileChooser fc = new JFileChooser();
+        fc.setMultiSelectionEnabled(true);
+        //In response to a button click:
+        int returnVal = fc.showOpenDialog(StockSwagGUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File[] files = fc.getSelectedFiles();
+            System.out.println("Loading historical data from files: " + files);
+            this.stockSwag.loadHistoricalDataFromFiles(files);
+            setListenerToJTableAfterAnalysis();
+            
+            } 
+    }//GEN-LAST:event_openHistoricalDataMenuItemActionPerformed
+
     public void createStockSearcherFrame()
     {
         SwingUtilities.invokeLater(new Runnable()        
@@ -338,6 +397,40 @@ public class StockSwagGUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void openPortfolioInJTable(){
+        this.stocks = this.stockSwag.getStocks();          
+            PortfolioTableDataModel pt = new PortfolioTableDataModel(stocks.size());
+            int i = 0;
+            for (Stock s : this.stocks) {
+                pt.setValueAt(s.getName(), i, 0);
+                pt.setValueAt(s.getSymbol(), i, 1);
+                pt.setValueAt(s.getClosePrice(), i, 2);
+                pt.setValueAt(s.getPe(), i, 3);
+                pt.setValueAt(s.getEps(), i, 4);
+                pt.setValueAt(s.getPs(), i, 5);
+                pt.setValueAt(s.getPb(), i, 6);
+                i++;
+            }
+            this.PortfolioTable.setModel(pt);
+    }
+    
+    public void setListenerToJTableAfterAnalysis(){
+        this.PortfolioTable.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener(){
+                    public void valueChanged(ListSelectionEvent e) {
+                        int selectedRow = PortfolioTable.getSelectedRow();
+                        System.out.println("selected row: " +selectedRow);
+                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(0)[0]);
+                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(0)[1]);
+                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(1)[1]);
+                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(2)[1]);
+                        System.out.println(stocks.get(selectedRow));
+                        StockAnalysisArea.setText(stocks.get(selectedRow).getHistoricalData().get(0)[0] + stocks.get(selectedRow).getHistoricalData().get(0)[1]);
+                    }
+                    
+                });
+    }
         
         
                 
@@ -347,6 +440,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
     private javax.swing.JTextField AddField;
+    private javax.swing.JButton AnalyzeButton;
     private javax.swing.JScrollPane PortfolioPane;
     private javax.swing.JTable PortfolioTable;
     private javax.swing.JButton ResetButton;
@@ -373,5 +467,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton loadStocksButton;
+    private javax.swing.JMenuItem openHistoricalDataMenuItem;
+    private javax.swing.JMenuItem openStocksMenuItem;
     // End of variables declaration//GEN-END:variables
 }
