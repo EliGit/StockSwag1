@@ -27,28 +27,32 @@ public class StockAnalyzer {
     
     public void calculateExpectedReturn(Stock stock){
         List<Double> expectedReturns = new ArrayList<Double>();
-        System.out.println(stock.getHistoricalData().get(1)[1]);
-        System.out.println(stock.getHistoricalData().get(2)[1]);
-        System.out.println(stock.getHistoricalData().get(3)[1]);
+        
+        for (String[] s : this.stocks.get(0).getHistoricalData()) {
+            System.out.println(s[0]+" "+s[1]);
+        }
         
         
-        for (int i = 1; i < stock.getHistoricalData().size()-1; i++) {
-            System.out.println(stock.getHistoricalData().get(i)[1]);
-            BigDecimal current = new BigDecimal(stock.getHistoricalData().get(i)[1]);
+        for (int i = stock.getHistoricalData().size()-1; i > 1; i--) {
+            System.out.println("");
+
+            BigDecimal current = new BigDecimal(stock.getHistoricalData().get(i-1)[1]);
             System.out.println(current);
-            System.out.println("");
-            System.out.println(stock.getHistoricalData().get(i-1)[1]);
-            BigDecimal previous = new BigDecimal(stock.getHistoricalData().get(i-1)[1]);
+            
+
+            BigDecimal previous = new BigDecimal(stock.getHistoricalData().get(i)[1]);
             System.out.println(previous);
-            
-            
-            BigDecimal er = current.subtract(previous).divide(previous);
-            
-            double err = er.doubleValue();
-            System.out.println(err);
             System.out.println("");
             
-            expectedReturns.add(err);
+            
+//            BigDecimal ylarivi = current.subtract(previous);
+//            BigDecimal er = ylarivi.divide(previous);
+            
+//            double err = er.doubleValue();
+//            System.out.println(err);
+//            System.out.println("");
+            
+//            expectedReturns.add(err);
         }
         stock.setExpectedReturns(expectedReturns);
     }
