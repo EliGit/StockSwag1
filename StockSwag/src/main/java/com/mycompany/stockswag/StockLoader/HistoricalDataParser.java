@@ -34,6 +34,7 @@ public class HistoricalDataParser extends CSVParser {
                 // nextLine[] is an array of values from the line                
                 editedLine[0] = CSVline[0];
                 editedLine[1] = CSVline[CSVline.length-1];
+//                System.out.println("add: " + editedLine[0] + " " + editedLine[1]);
                 super.CSVFileRows.add(editedLine);
             }
         } catch (FileNotFoundException ex) {

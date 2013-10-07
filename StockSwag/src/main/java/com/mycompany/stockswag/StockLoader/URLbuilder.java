@@ -53,8 +53,8 @@ public class URLbuilder {
         this.stringURL = url_first + url_middle + url_last;                       
     }
     
-    //http://ichart.finance.yahoo.com/table.csv?s=TSLA&d=8&e=30&f=2013&g=d&a=5&b=29&c=2010&ignore=.csv
-    
+    //http://ichart.finance.yahoo.com/table.csv?s=TSLA&d=8&e=30&f=2013&g=d&a=5&b=29&c=2010&ignore=.csv 
+   
     public void buildHistoricalDataStringURL(String symbol){
         Calendar c = new GregorianCalendar();
         

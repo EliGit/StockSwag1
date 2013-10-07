@@ -416,17 +416,15 @@ public class StockSwagGUI extends javax.swing.JFrame {
     }
     
     public void setListenerToJTableAfterAnalysis(){
+        this.stockSwag.downloadIndexData();
+        this.stockSwag.calculateDailyExpectedReturns();
+        this.stockSwag.calculateERs();
         this.PortfolioTable.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener(){
                     public void valueChanged(ListSelectionEvent e) {
                         int selectedRow = PortfolioTable.getSelectedRow();
-                        System.out.println("selected row: " +selectedRow);
-                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(0)[0]);
-                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(0)[1]);
-                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(1)[1]);
-                        System.out.println(stocks.get(selectedRow).getHistoricalData().get(2)[1]);
-                        System.out.println(stocks.get(selectedRow));
-                        StockAnalysisArea.setText(stocks.get(selectedRow).getHistoricalData().get(0)[0] + stocks.get(selectedRow).getHistoricalData().get(0)[1]);
+                        
+                        StockAnalysisArea.setText(""+stocks.get(selectedRow).geteR());
                     }
                     
                 });

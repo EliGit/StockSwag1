@@ -7,6 +7,7 @@ package com.mycompany.stockswag;
 import com.mycompany.stockswag.TickerSymbolHandling.TickerLister;
 import com.mycompany.stockswag.StockLoader.StockDataLoader;
 import com.mycompany.stockswag.StockManager.Stock;
+import com.mycompany.stockswag.StockManager.StockAnalyzer;
 import com.mycompany.stockswag.StockManager.StockManager;
 import com.mycompany.stockswag.StockManager.StockFactory;
 import java.io.File;
@@ -25,6 +26,7 @@ public class StockSwag {
     private StockManager stockManager;    
     private StockDataLoader stockLoader;
     private List<String> tickers;
+    private StockAnalyzer stockAnalyzer;
     
     /**
      * Constructor for StockSwag, initializes: 
@@ -36,6 +38,7 @@ public class StockSwag {
         this.stockManager = new StockManager();
         this.stockFactory = new StockFactory(this.stockManager);   
         this.tickerLister = new TickerLister();
+        this.stockAnalyzer = new StockAnalyzer();
     }
     /**
      * Sends user generated ticker symbols to tickerLister.
@@ -53,17 +56,18 @@ public class StockSwag {
         return listed;
     }
     /**
-     * Load latest stockdata from the selected stocks in List<String> tickers.
+     * Downoad latest stockdata from the selected stocks in List<String> tickers.
      * Calls StockDataLoader to download and parse the stocks and passes them to
      * StockFactory that creates objects out of them
      */
     
     public void downloadStocks(){   
         this.stockFactory.buildStocks(this.stockLoader.fetchLatestStockData(this.tickers));
+        this.stockAnalyzer.setStocks(this.stockManager.getStocks());
     }
     
     /**
-     * Load historical data of all stocks in stockManager.
+     * Download historical data of all stocks in stockManager.
      * Calls StockDataLoader to download and parse the historical data of the stocks and ads them to the corresponding stocks.     
      */
     
@@ -71,10 +75,21 @@ public class StockSwag {
         int stockCSVid = 1;
         for (Stock s : this.stockManager.getStocks()) {
             ArrayList<String[]> historicalStockData = new ArrayList<String[]>(this.stockLoader.fetchHistoricalStockData(s.getSymbol(), stockCSVid));
+            System.out.println("added historicalStockData to: " + s.StockString());
             s.setHistoricalData(historicalStockData);
+            
             stockCSVid++;
         }        
     }
+    /**
+     * Download S&P500 index, parse it and give to Index object.
+     * 
+     */
+    public void downloadIndexData(){
+        ArrayList<String[]> historicalIndexData = new ArrayList<String[]>(this.stockLoader.fetchHistoricalStockData("^GSPC", 0));
+        this.stockManager.getIndex().setHistoricalData(historicalIndexData);
+    }
+   
     
     /**
      * Load latest stockdata from the given CSV file.
@@ -82,7 +97,7 @@ public class StockSwag {
      */
     public void loadStocksFromFile(File file){
         this.stockFactory.buildStocks(this.stockLoader.fetchLatestStockDataFromFile(file));
-        
+        this.stockAnalyzer.setStocks(this.stockManager.getStocks());        
     }
     
     /**
@@ -123,6 +138,29 @@ public class StockSwag {
     public List<Stock> getStocks(){
         return this.stockManager.getStocks();
     }
+    
+    /**
+     * Calculate Expected returns for all stocks in StockManager.
+     */
+    public void calculateDailyExpectedReturns(){
+        for (Stock stock : this.stockManager.getStocks()) {
+            this.stockAnalyzer.calculateExpectedReturn(stock);
+        }
+        this.stockAnalyzer.calculateExpectedReturn(this.stockManager.getIndex());
+    }
+    
+    public void calculateERs(){
+        for(Stock stock : this.stockManager.getStocks()){
+            this.stockAnalyzer.calculateER(stock);
+        }
+        this.stockAnalyzer.calculateER(this.stockManager.getIndex());
+    }
+
+    public StockAnalyzer getStockAnalyzer() {
+        return stockAnalyzer;
+    }
+    
+    
     
     
     

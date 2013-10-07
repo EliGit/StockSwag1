@@ -1,8 +1,10 @@
+package stockswagtestailua;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag.StockManager;
+
 
 import java.util.ArrayList;
 import java.util.List;

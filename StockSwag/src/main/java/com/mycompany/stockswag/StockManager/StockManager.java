@@ -15,12 +15,14 @@ import java.util.List;
  */
 public class StockManager {
     private List<Stock> stocks;
+    private Index index;
     
     /**
      * Constructor. Initializes List that holds all the stocks.
      */
     public StockManager(){
         this.stocks = new ArrayList<Stock>();
+        this.index=new Index();
     }
     /**
      * Add stocks to list.
@@ -29,6 +31,16 @@ public class StockManager {
     public void addStock(Stock s){                        
         this.stocks.add(s);
     }
+
+    public Index getIndex() {
+        return index;
+    }
+
+    public void setIndex(Index index) {
+        this.index = index;
+    }
+    
+    
     
     public List<Stock> getStocks(){
         return this.stocks;
