@@ -16,8 +16,7 @@ import java.util.Scanner;
  * Currently very inefficient, however, still fast enough for this program.
  * @author EliAir
  */
-public class TickerValidator {
-    private List<String> tickers;        
+public class TickerValidator {      
     private InputStream inputStream;
     private Scanner fileScanner;
     /**
@@ -28,30 +27,24 @@ public class TickerValidator {
      
     }
 
-    public void setTickers(List<String> tickers) {
-        this.tickers = tickers;
-    }
 
-    public List<String> getTickers() {
-        return tickers;
-    }
 
     /**
      * Validates all stock ticker symbols stored in tickers.
      * @return True if tickers are valid.
      */
-    public boolean ValidateTickers(){
-        if(this.tickers.isEmpty()){
+    public boolean ValidateTickers(List<String> tickers){
+        if(tickers.isEmpty()){
             return false;
         }
         
-        boolean isValid = true;
-        for(String s : this.tickers){
+        boolean areValid = true;
+        for(String s : tickers){
             if(!ValidateTicker(s)){
-                isValid = false;
+                areValid = false;
             }            
         }
-        return isValid;
+        return areValid;
     }
     /**
      * Validates one stock ticker.

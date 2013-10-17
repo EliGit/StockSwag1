@@ -17,12 +17,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- *
+ * The main GUI of StockSwag. Provides all functionality to the user.
  * @author EliAir
  */
 public class StockSwagGUI extends javax.swing.JFrame {
     private StockSwag stockSwag;
-    private List<String> stocksymbols;
     private List<Stock> stocks;
     /**
      * Creates new form StockSwagGUI
@@ -30,7 +29,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
     public StockSwagGUI(StockSwag stockSwag) {
         initComponents();
         this.stockSwag = stockSwag;
-        this.stocksymbols = new ArrayList<String>();
         this.stocks = new ArrayList<Stock>();
     }
 
@@ -300,16 +298,27 @@ public class StockSwagGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Resets the program to its beginning state. 
+ * "A clean slate" although it does not restart the program. Tested in most cases.
+ * @param evt 
+ */
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
-        // TODO add your handling code here:
+    
+        // Remove stocks from the app logic:
         this.stockSwag.clearStocks();
-        this.stocksymbols.clear();
+
+        // Reset statusScreen and StockAnalysisArea
         this.StatusScreen.setText("");
         this.StatusScreen.setText("Write stock ticker symbols on the left, for example: TSLA, YHOO, MSFT, NOK, AAPL \n");
         this.StockAnalysisArea.setText("Tähän historiallista dataa ylemmäst taulukosta valitusta yksittäisestä osakkeesta. \nDatan hakeminen vahvistetaan käyttäjän toimesta. Hintakehitys, CAPM, Beta laskelmat.\n\nTulossa myös portfolioanalyysi:\n- käyttäjä määrittelee osakkeiden painon (%) portfoliossa \n- tämän perusteella voidaan laskea portfolion riskiä, tuottovaatimusta kunhan \n   ensin lasketaan yksittäisten osakkeiden tuottavaatimus(CAPM) ja Beta.");
+        
+        // Reset stock symbol list:
         DefaultListModel listmodel = (DefaultListModel) this.StockList.getModel();
-        listmodel.clear();        
+        listmodel.clear();
+        
+        // Reset portfolio jTable:
+        this.PortfolioTable.getSelectionModel().clearSelection();
         PortfolioTableDataModel pt = new PortfolioTableDataModel(0);
         this.PortfolioTable.setModel(pt);
     }//GEN-LAST:event_ResetButtonActionPerformed
@@ -322,7 +331,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
 
     private void loadStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadStocksButtonActionPerformed
         // TODO add your handling code here:        
-        if(this.stockSwag.listTickers(this.stocksymbols) == true){
+        if(this.stockSwag.validateTickersList()){
             this.StatusScreen.append("Fetching stock data!\n");
             this.stockSwag.downloadStocks();
             openPortfolioInJTable();
@@ -341,18 +350,23 @@ public class StockSwagGUI extends javax.swing.JFrame {
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         // TODO add your handling code here:
-        String s = this.AddField.getText();
+        String ticker = this.AddField.getText();
         DefaultListModel listmodel = (DefaultListModel) this.StockList.getModel();
-        listmodel.addElement(s);
-        this.stocksymbols.add(s);
+        listmodel.addElement(ticker);
+        this.stockSwag.addTicker(ticker);
         this.AddField.setText("");
         
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void AnalyzeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyzeButtonActionPerformed
         // TODO add your handling code here:
-        this.stockSwag.downloadHistoricalData();
-        setListenerToJTableAfterAnalysis();
+        if(this.stockSwag.getStocks().isEmpty()){
+            this.StatusScreen.append("No stocks loaded to analyze! Load stocks first. \n");
+        } else {
+            this.stockSwag.downloadHistoricalData();
+            setListenerToJTableAfterAnalysis();
+        }
+        
         
     }//GEN-LAST:event_AnalyzeButtonActionPerformed
 
@@ -362,6 +376,8 @@ public class StockSwagGUI extends javax.swing.JFrame {
         //In response to a button click:
         int returnVal = fc.showOpenDialog(StockSwagGUI.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            
+            
             File file = fc.getSelectedFile();
             System.out.println("Loading stocks from file: " + file);
             this.stockSwag.loadStocksFromFile(file);
@@ -386,6 +402,9 @@ public class StockSwagGUI extends javax.swing.JFrame {
             } 
     }//GEN-LAST:event_openHistoricalDataMenuItemActionPerformed
 
+    /**
+     * Creates new window for searching stocks.
+     */
     public void createStockSearcherFrame()
     {
         SwingUtilities.invokeLater(new Runnable()        
@@ -397,7 +416,9 @@ public class StockSwagGUI extends javax.swing.JFrame {
             }
         });
     }
-    
+    /**
+     * Initializes PortfolioTableDataModel, passes stock data and sets it as the data model for PortfolioTable.
+     */
     public void openPortfolioInJTable(){
         this.stocks = this.stockSwag.getStocks();          
             PortfolioTableDataModel pt = new PortfolioTableDataModel(stocks.size());
@@ -415,6 +436,10 @@ public class StockSwagGUI extends javax.swing.JFrame {
             this.PortfolioTable.setModel(pt);
     }
     
+    /**
+     * Handles necessary Index download and calculations, and sets up a listener for PortfolioTable so user can view the analysis of each stock.
+     */
+    
     public void setListenerToJTableAfterAnalysis(){
         this.stockSwag.downloadIndexData();
         this.stockSwag.calculateDailyExpectedReturns();
@@ -423,8 +448,10 @@ public class StockSwagGUI extends javax.swing.JFrame {
                 new ListSelectionListener(){
                     public void valueChanged(ListSelectionEvent e) {
                         int selectedRow = PortfolioTable.getSelectedRow();
+                        if(selectedRow >= 0){
+                            StockAnalysisArea.setText(""+stocks.get(selectedRow).geteR());
+                        }
                         
-                        StockAnalysisArea.setText(""+stocks.get(selectedRow).geteR());
                     }
                     
                 });

@@ -32,15 +32,11 @@ public class TickerValidatorTest {
         testTickers.add("AA");
         testTickers.add("ZF");
         tv = new TickerValidator();
-        tv.setTickers(testTickers);
+
     }
     
 
-    @Test
-    public void constructorWorks() {
-        assertEquals(testTickers, tv.getTickers());
-        
-    }
+
 
     @Test
     public void validateTickerWorks(){
@@ -59,7 +55,7 @@ public class TickerValidatorTest {
 //    
     @Test
     public void ValidateTickersWorks(){
-        assertEquals(true, tv.ValidateTickers());
+        assertEquals(true, tv.ValidateTickers(testTickers));
     }
     
     @Test
@@ -67,17 +63,16 @@ public class TickerValidatorTest {
         testTickers.add("ASDASDASD");
         
         tv = new TickerValidator();
-        tv.setTickers(testTickers);
+
         
-        assertEquals(false, tv.ValidateTickers());
+        assertEquals(false, tv.ValidateTickers(testTickers));
     }
     
     @Test
     public void ValidateTickersWorksWithEmptyTickers(){
         testTickers.clear();
         tv = new TickerValidator();
-        tv.setTickers(testTickers);
-        assertEquals(false, tv.ValidateTickers());
+        assertEquals(false, tv.ValidateTickers(testTickers));
     }
 //    
   

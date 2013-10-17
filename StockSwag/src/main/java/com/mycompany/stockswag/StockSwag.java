@@ -4,65 +4,63 @@
  */
 package com.mycompany.stockswag;
 
-import com.mycompany.stockswag.TickerSymbolHandling.TickerLister;
+
 import com.mycompany.stockswag.StockLoader.StockDataLoader;
 import com.mycompany.stockswag.StockManager.Stock;
 import com.mycompany.stockswag.StockManager.StockAnalyzer;
 import com.mycompany.stockswag.StockManager.StockManager;
 import com.mycompany.stockswag.StockManager.StockFactory;
+import com.mycompany.stockswag.TickerSymbolHandling.TickerValidator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StockSwag class provides access to major parts of StockSwag for the UI
- * TickerSymbolHandling, StockDataLoader and StockManager.
+ * StockSwag class is a higher level abstraction of the application's functionality.
+ * The GUI uses this class to access the app's logic.
  * 
  * @author EliAir
  */
 public class StockSwag {
-    private TickerLister tickerLister;            
+    private TickerValidator tickerValidator;
     private StockFactory stockFactory;
     private StockManager stockManager;    
-    private StockDataLoader stockLoader;
+    private StockDataLoader stockDataLoader;
     private List<String> tickers;
     private StockAnalyzer stockAnalyzer;
     
     /**
-     * Constructor for StockSwag, initializes: 
-     * StockDataLoader, StockManager, StockFactory and TickerLister
+     * Constructor for StockSwag.
+     *  Initializes vital parts of the application such as
+     *  StockDataLoader, StockManager, StockFactory, TickerValidator and StockAnalyzer.
+     *  ArrayList tickers holds the user inputted stock ticker symbols.
      */
     
     public StockSwag(){
-        this.stockLoader = new StockDataLoader();
+        this.stockDataLoader = new StockDataLoader();
         this.stockManager = new StockManager();
         this.stockFactory = new StockFactory(this.stockManager);   
-        this.tickerLister = new TickerLister();
+        this.tickerValidator = new TickerValidator();        
         this.stockAnalyzer = new StockAnalyzer();
+        this.tickers = new ArrayList<String>();
     }
     /**
-     * Sends user generated ticker symbols to tickerLister.
-     * Called by GUI when user selects "StockSwag!" functionality
-     * 
-     * @param tickers A list of ticker symbols from the user
+     * Validates user inputted ticker symbols with tickerValidator.
      * @return boolean indicating whether tickers are valid or not
      */
     
-    public boolean listTickers(List<String> tickers){
-        boolean listed = this.tickerLister.createTickerList(tickers);
-        if(listed){
-            this.tickers = tickers;
-        }        
-        return listed;
+    public boolean validateTickersList(){
+        boolean tickersValid = this.tickerValidator.ValidateTickers(this.tickers);        
+        return tickersValid;
     }
     /**
-     * Downoad latest stockdata from the selected stocks in List<String> tickers.
+     * Downoad latest stockdata corresponding the user inputted ticker symbols.
      * Calls StockDataLoader to download and parse the stocks and passes them to
-     * StockFactory that creates objects out of them
+     * StockFactory that creates Stock objects.
      */
     
     public void downloadStocks(){   
-        this.stockFactory.buildStocks(this.stockLoader.fetchLatestStockData(this.tickers));
+        this.stockFactory.buildStocks(this.stockDataLoader.fetchLatestStockData(this.tickers));
         this.stockAnalyzer.setStocks(this.stockManager.getStocks());
     }
     
@@ -74,7 +72,7 @@ public class StockSwag {
     public void downloadHistoricalData(){
         int stockCSVid = 1;
         for (Stock s : this.stockManager.getStocks()) {
-            ArrayList<String[]> historicalStockData = new ArrayList<String[]>(this.stockLoader.fetchHistoricalStockData(s.getSymbol(), stockCSVid));
+            ArrayList<String[]> historicalStockData = new ArrayList<String[]>(this.stockDataLoader.fetchHistoricalStockData(s.getSymbol(), stockCSVid));
             System.out.println("added historicalStockData to: " + s.StockString());
             s.setHistoricalData(historicalStockData);
             
@@ -86,17 +84,17 @@ public class StockSwag {
      * 
      */
     public void downloadIndexData(){
-        ArrayList<String[]> historicalIndexData = new ArrayList<String[]>(this.stockLoader.fetchHistoricalStockData("^GSPC", 0));
+        ArrayList<String[]> historicalIndexData = new ArrayList<String[]>(this.stockDataLoader.fetchHistoricalStockData("^GSPC", 0));
         this.stockManager.getIndex().setHistoricalData(historicalIndexData);
     }
    
     
     /**
-     * Load latest stockdata from the given CSV file.
+     * Load latest stock data from the given CSV file.
      * Calls StockDataLoader to parse the stockdata and then passes it on to stockFactory.
      */
     public void loadStocksFromFile(File file){
-        this.stockFactory.buildStocks(this.stockLoader.fetchLatestStockDataFromFile(file));
+        this.stockFactory.buildStocks(this.stockDataLoader.fetchLatestStockDataFromFile(file));
         this.stockAnalyzer.setStocks(this.stockManager.getStocks());        
     }
     
@@ -107,7 +105,7 @@ public class StockSwag {
     public void loadHistoricalDataFromFiles(File[] files){
         int i = 0;
         for(File file : files){
-            ArrayList<String[]> historicalStockData = new ArrayList<String[]>(this.stockLoader.fetchHistoricalStockDataFromFile(file));
+            ArrayList<String[]> historicalStockData = new ArrayList<String[]>(this.stockDataLoader.fetchHistoricalStockDataFromFile(file));
             this.stockManager.getStocks().get(i).setHistoricalData(historicalStockData);
             System.out.println("Added: " + file.getPath() + " to: " + this.stockManager.getStocks().get(i));
             i++;
@@ -115,12 +113,13 @@ public class StockSwag {
     }
     
     /**
-     * Clears StockManager's stocklist.
-     * Important when loading new stocks to not have the old ones in the analyzer.
+     * Clears StockManager's stocklist and tickers in StockSwag.
+     * Important when loading new stocks to not have the old ones in the system.
      */
     
     public void clearStocks(){
         this.stockManager.clearStocks();
+        this.tickers.clear();
     }
     
     /**
@@ -131,7 +130,7 @@ public class StockSwag {
         this.stockManager.printStocks();
     }
     /**
-     * Gets all stocks for the GUI to be placed on the stockdata jTable
+     * Gets all stocks currently loaded in StockManager.
      * 
      * @return stocks A list of stocks
      */
@@ -144,25 +143,24 @@ public class StockSwag {
      */
     public void calculateDailyExpectedReturns(){
         for (Stock stock : this.stockManager.getStocks()) {
-            this.stockAnalyzer.calculateExpectedReturn(stock);
+            this.stockAnalyzer.calculateDailyExpectedReturns(stock);
         }
-        this.stockAnalyzer.calculateExpectedReturn(this.stockManager.getIndex());
+        this.stockAnalyzer.calculateDailyExpectedReturns(this.stockManager.getIndex());
     }
     
     public void calculateERs(){
         for(Stock stock : this.stockManager.getStocks()){
-            this.stockAnalyzer.calculateER(stock);
+            this.stockAnalyzer.calculateAnnualAverageExpectedReturn(stock);
         }
-        this.stockAnalyzer.calculateER(this.stockManager.getIndex());
+        this.stockAnalyzer.calculateAnnualAverageExpectedReturn(this.stockManager.getIndex());
     }
 
     public StockAnalyzer getStockAnalyzer() {
         return stockAnalyzer;
     }
     
-    
-    
-    
-    
+    public void addTicker(String ticker){
+        this.tickers.add(ticker);
+    }
         
 }

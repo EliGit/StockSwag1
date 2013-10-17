@@ -47,7 +47,7 @@ public class UI {
                 }
                 tickers.add(s);            
             }
-            if(this.stockSwag.listTickers(tickers)){
+            if(this.stockSwag.validateTickersList()){
                 break;
             }
             this.tUI.printTickerFail();

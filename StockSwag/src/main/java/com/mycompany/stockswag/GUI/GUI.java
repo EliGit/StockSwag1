@@ -7,10 +7,9 @@ package com.mycompany.stockswag.GUI;
 
 import com.mycompany.stockswag.StockSwag;
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 /**
- *
+ * Runnable implementation that creates and runs the StockSwagGUI.
  * @author EliAir
  */
 public class GUI implements Runnable {

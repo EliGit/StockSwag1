@@ -32,8 +32,11 @@ public class App
                 }
             }
                 
+            
+            //Kommentoi näistä toinen pois (se mitä et halua käyttää)
             UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
 //            UIManager.setLookAndFeel("net.sourceforge.napkinlaf.NapkinLookAndFeel");
+            //Jätin NapkinLookAndFeelin bonukseksi tarkistajille, haluatte varmasti käyttää tulevissa projekteissanne ;)
   
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(StockSwagGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -51,10 +54,9 @@ public class App
         SwingUtilities.invokeLater(gui);
         
 
-//  CLI       
+//  Command Line Interface       
 //        Scanner inputScanner = new Scanner(System.in);                               
 //        UI ui = new UI(inputScanner, stockSwag);
 //        ui.run();
-//  CLI
     }
 }

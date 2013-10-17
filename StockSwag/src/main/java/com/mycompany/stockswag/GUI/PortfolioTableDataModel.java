@@ -4,12 +4,12 @@
  */
 package com.mycompany.stockswag.GUI;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
+/** Data Model for the PortfolioTable jTable that is used to display stock data to the user.
+ *  ArrayList<String[]> structure is used to simulate the table because the amount of rows varies while columns do not.
  * @author EliAir
  */
 public class PortfolioTableDataModel extends AbstractTableModel {
@@ -18,12 +18,18 @@ public class PortfolioTableDataModel extends AbstractTableModel {
     private List<String[]> table;
     private String[] columnNames;
     
+    /**
+     * Constructor for PortfolioTableDataModel.
+     * Initializes the table with 7 named columnds ("Name", "Symbol", "Close Price", "P/E", "EPS", "P/S", "P/B") and specified amount of rows.
+     * @param rows 
+     */
+    
     public PortfolioTableDataModel(int rows){
         this.cols = 7;
         this.rows = rows;
-        this.table = new LinkedList<String[]>();
+        this.table = new ArrayList<String[]>();
         for (int i = 0; i < rows; i++) {
-            this.table.add(new String[]{null, null, null, null, null, null, null, "%porfoliossa", "CAPM?"});
+            this.table.add(new String[]{null, null, null, null, null, null, null}); //% ja CAPM tänne ?
         }
         this.columnNames = new String[]{"Name", "Symbol", "Close Price", "P/E", "EPS", "P/S", "P/B"};
     }
@@ -44,6 +50,7 @@ public class PortfolioTableDataModel extends AbstractTableModel {
         this.table.get(rowIndex)[columnIndex] = o;
     }
     
+    @Override
     public String getColumnName(int col) {
         return columnNames[col].toString();
     }

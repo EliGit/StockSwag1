@@ -16,10 +16,10 @@ public class StockFactory {
     
     /**
      * Costructor.
-     * @param stockAnalyzer 
+     * @param stockManager 
      */
-    public StockFactory(StockManager stockAnalyzer){
-        this.stockAnalyzer = stockAnalyzer;
+    public StockFactory(StockManager stockManager){
+        this.stockAnalyzer = stockManager;
     
     }
        /**
@@ -49,20 +49,20 @@ public class StockFactory {
     }
     /**
      * Builds all stock objects from Yahoo CSV file data.
-     * Uses buildStock(int nth, List<String[]> stockData) and addToStockAnalyzer(Stock stock)
+     * Uses buildStock(int nth, List<String[]> stockData) and addToStockManager(Stock stock)
      * @param stockData 
      */
     public void buildStocks(List<String[]> stockData){
         for(int i = 0; i < stockData.size(); i++){
-            this.addToStockAnalyzer(this.buildStock(i, stockData));            
+            this.addToStockManager(this.buildStock(i, stockData));            
         }
     }
     /**
-     * Adds stock objects to stockAnalyzer.
+     * Adds stock objects to stockManager.
      * Used by buildStocks(List<String[]> stockData)
      * @param stock Stock object.
      */
-    public void addToStockAnalyzer(Stock stock){
+    public void addToStockManager(Stock stock){
         this.stockAnalyzer.addStock(stock);
     }
 }

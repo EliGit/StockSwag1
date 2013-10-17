@@ -20,7 +20,7 @@ public class Stock {
     private String eps;
     private String ps;
     private String pb;
-    private double eR;
+    private String eR;
     private List<String[]> historicalData;
     private List<Double> expectedReturns;
     
@@ -106,11 +106,11 @@ public class Stock {
         this.expectedReturns = expectedReturns;
     }
 
-    public double geteR() {
+    public String geteR() {
         return eR;
     }
 
-    public void seteR(double eR) {
+    public void seteR(String eR) {
         this.eR = eR;
     }
     
