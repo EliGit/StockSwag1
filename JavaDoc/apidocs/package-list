@@ -1,0 +1,6 @@
+com.mycompany.stockswag
+com.mycompany.stockswag.GUI
+com.mycompany.stockswag.StockLoader
+com.mycompany.stockswag.StockManager
+com.mycompany.stockswag.TickerSymbolHandling
+com.mycompany.stockswag.textUI

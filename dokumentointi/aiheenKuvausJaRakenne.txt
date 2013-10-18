@@ -1,20 +1,38 @@
-Aihe: Osakeanalysoija (Portfoliomanager?)
 
-StockSwag ohjelma analysoi käyttäjän määrittelemiä osakkeita eri rahoituksen menetelmin kuten tunnuslukuanalyysilla. 
-Ohjelma käyttää muutamia eri metriikoita ja määrittelee, ovatko valitut osakkeet yli- vai alihinnoiteltuja. 
-Ohjelma on hyödyllinen käyttäjälle, koska se hakee ja analysoi tietoja, josta pitäisi muuten maksaa 
-tai jota varten pitäisi nähdä jonkin verran vaivaa.
+AIHEMÄÄRITTELY:
 
-Ohjelma tulee käyttämään Yahoo Finance API rajapintaa, joka kuvaillaan seuraavassa artikkelissa: 
+StockSwag on ohjelma, jolla voi hakea osakkeiden dataa Yahoo Financesta CSV tiedostoina.
+StockSwag osaa esittää osakkeiden datat käyttäjälle merkittävällä tavalla ja parsii datan
+helposti muokattavaan muotoon. Ohjelmaan on siis kätevää kehittää tiiviimpää analyysia jatkossa.
+Tällä hetkellä StockSwag osaa laskea päivittäiset kasvut ja näistä muodostetun tuotto-odotuksen.
+
+Ohjelma käyttää Yahoo Finance API rajapintaa, joka kuvaillaan seuraavassa artikkelissa: 
 http://greenido.wordpress.com/2009/12/22/yahoo-finance-hidden-api/. 
 Idea on ladata tarvittavat tiedot CSV tiedostossa ja parsia tämä StockSwag ohjelman käyttöön.
 
+ks. Käyttötapauskaavio!
 
-Käyttäjä: Henkilö 
 
-Käyttäjän toiminnot:
+RAKENNEKUVAUS:
 
-- Valitse analysoitavat osakkeet.
-(- Valitse miten osakkeet analysoidaan: EV, CAPM, Tunnusluvut: P/S, P/B, P/E, EPS..., ??)
-- Tarkastele osakkeiden analyysia.
+StockSwag ohjelman ydin on StockSwag luokka, joka yhdistää ohjelma eri tärkeät osat, jotka ovat: GUI, StockLoader, 
+StockManager ja TickerSymbolHandling.
+
+GUI tarjoaa käyttöliittymän ja osaa esittää dataa käyttäjälle, se on yhteydessä vain StockSwag luokkaan (ja mainiin App luokassa).
+
+TickerSymbolHandling on vastuussa osakkeiden symbolien (ticker symbol) validoinnista. 
+Se käyttää .txt tiedostossa olevaa listaa valideista osakesymboleista.
+
+StockManager huolehtii osakeolioiden luomisesta, hallitsemisesta ja mahdollisesta analysoimisesta.
+
+StockLoader huolehtii osakedatan lataamisesta ja parsimisesta.
+
+
+
+
+TESTEISTÄ:
+
+Testit eivät testaa "hallintaluokkia" kuten StockSwag ja StockLoader, sillä nämä vain käyttävät jo testattuja luokkia. Samoin myös esim. StockFactoryn testit huolehtivat, että Stock toimii.
+
+GUI:ta on testattu vain käsin, mutta melko paljon. Tällä hetkellä ei suuria ongelmia.
 

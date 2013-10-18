@@ -1,0 +1,9 @@
+
+KÄYTTÖOHJEET:
+
+Käynnistä ohjelma "java -jar ohjelmannimi.jar"
+
+Ohjelmassa voit nyt lisätä osakkeita vasemalla olevaan kenttään. Jollet tiedä osakkeiden symboleita, voit myös etsiä niitä.
+Load Stock toiminto lataa osakkeet ohjelmaan Yahoosta. Analyze lataa niiden historialliset datat ja laskee vuosittaisen kasvuodotuksen.
+
+Reset tyhjentää ohjelman ja palauttaa sen aloitustilaan.
