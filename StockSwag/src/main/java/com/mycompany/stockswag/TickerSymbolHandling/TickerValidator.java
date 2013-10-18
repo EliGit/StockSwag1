@@ -21,7 +21,7 @@ public class TickerValidator {
     private Scanner fileScanner;
     /**
      * Constructor.
-     * @param tickers Stock ticker symbols.
+     * 
      */
     public TickerValidator(){
      

@@ -100,7 +100,7 @@ public class StockSwag {
     
     /**
      * Load historical stock data from the given CSV file.
-     * Adds the historical data to the corresponding stock (not ready/fully implemented!)
+     * Adds the historical data to the corresponding stock.
      */
     public void loadHistoricalDataFromFiles(File[] files){
         int i = 0;

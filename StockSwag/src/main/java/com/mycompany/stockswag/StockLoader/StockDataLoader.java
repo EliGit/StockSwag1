@@ -50,7 +50,7 @@ public class StockDataLoader {
         /**
          * Fetches the given stock from Yahoo as a CSV file and returns its historical data parsed in a List<String[]> structure.
          * @param symbol
-         * @return 
+         * @return returns the rows of the CSV File.
          */
     public List<String[]> fetchHistoricalStockData(String symbol, int id){
          //build URL from ticker list

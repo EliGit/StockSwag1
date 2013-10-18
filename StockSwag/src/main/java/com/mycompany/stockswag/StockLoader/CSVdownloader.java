@@ -22,7 +22,7 @@ public class CSVdownloader {
     /**
      * Constructor.
      * Requires a URL to download the CSV from.
-     * @param url 
+     * 
      */
     public CSVdownloader(){    
     }

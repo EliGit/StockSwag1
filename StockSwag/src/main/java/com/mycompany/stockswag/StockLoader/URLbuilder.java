@@ -28,7 +28,7 @@ public class URLbuilder {
     /**
      * Constructor for URLbuilder.
      * Initializes lastestDataSymbols.
-     * @param symbols List of stock ticker symbols. 
+     * 
      */
     public URLbuilder() {
 
@@ -104,7 +104,7 @@ public class URLbuilder {
     /**
      * Uses buildURL to build a URL and then returns it.
      * Since this method is never used alone, the use of buildURL is automatic.
-     * @return 
+     * @return returns the URL as an URL object.
      */
         
     public URL getURL(){

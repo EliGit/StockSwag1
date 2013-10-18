@@ -429,7 +429,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
                     public void valueChanged(ListSelectionEvent e) {
                         int selectedRow = PortfolioTable.getSelectedRow();
                         if(selectedRow >= 0){
-                            StockAnalysisArea.setText("Select a stock to see Average Return: \n"+stocks.get(selectedRow).geteR());
+                            StockAnalysisArea.setText("Select a stock to see Expected (Annual) Return: \n"+stocks.get(selectedRow).geteR() + " %");
                         }
                         
                     }

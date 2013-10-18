@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * Represents individual Stocks in StockSwag.
- * 
+ *  
+ * historicalData contains date & price pairs starting from newest to oldest in list<String[]> format.
+ * dailyReturns contains %growths starting from oldest. Values in %!
  * @author EliAir
  */
 public class Stock {
@@ -35,9 +37,7 @@ public class Stock {
      * @param eps EPS - earnings per share.
      * @param ps P/S - price-to-sales.
      * @param pb P/B - price-to-book.
-     * @param eR average expected return.
-     * @param historicalData historicalData contains date & price pairs starting from newestto oldest in list<String[]> format.
-     * @param dailyReturns dailyReturns contains %growths starting from oldest. Values in %!
+     * 
      */
     public Stock(String symbol, String name, String closePrice, String pe, String eps, String ps, String pb){
         this.symbol = symbol;

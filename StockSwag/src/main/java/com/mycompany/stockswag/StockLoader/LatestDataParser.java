@@ -22,7 +22,7 @@ public class LatestDataParser extends CSVParser {
     /**
      * Constructor.
      * See CSVParser.
-     * @param CSVfile 
+     * 
      */
     public LatestDataParser(){
         super();       

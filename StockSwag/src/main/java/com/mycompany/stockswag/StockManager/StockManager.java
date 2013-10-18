@@ -24,10 +24,7 @@ public class StockManager {
         this.stocks = new ArrayList<Stock>();
         this.index=new Index();
     }
-    /**
-     * Add stocks to list.
-     * @param s 
-     */
+
     public void addStock(Stock s){                        
         this.stocks.add(s);
     }
