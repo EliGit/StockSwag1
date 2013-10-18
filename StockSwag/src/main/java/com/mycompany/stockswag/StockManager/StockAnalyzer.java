@@ -11,7 +11,7 @@ import java.util.List;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 /**
- *
+ * 
  * @author EliAir
  */
 public class StockAnalyzer {
@@ -27,68 +27,54 @@ public class StockAnalyzer {
     }
     
     public void calculateDailyExpectedReturns(Stock stock){
-        List<Double> expectedReturns = new ArrayList<Double>();
-        
-//        for (String[] s : this.stocks.get(0).getHistoricalData()) {
-//            System.out.println(s[0]+" "+s[1]);
-//        }
-        
-        
-        for (int i = stock.getHistoricalData().size()-1; i > 1; i--) {
-//            System.out.println("");
-
-            BigDecimal current = new BigDecimal(stock.getHistoricalData().get(i-1)[1]);
-//            System.out.println(current);
-            
-
+        List<Double> expectedReturns = new ArrayList<Double>();                
+        //go through historical data starting from oldest date
+        for (int i = stock.getHistoricalData().size()-1; i > 1; i--) {            
             BigDecimal previous = new BigDecimal(stock.getHistoricalData().get(i)[1]);
-//            System.out.println(previous);
-//            System.out.println("");
-            
-            
-            //%growth = ((current - previous) / previous) * 100%
+            BigDecimal current = new BigDecimal(stock.getHistoricalData().get(i-1)[1]);                                    
+            //daily %growth = ((current - previous) / previous) * 100%
             BigDecimal ylarivi = current.subtract(previous);                        
             BigDecimal growth = ylarivi.divide(previous, 4 , RoundingMode.HALF_UP);            
-//            System.out.println(growth);
-            BigDecimal percentageGrowth = growth.multiply(BigDecimal.valueOf(100));
-            
-            double er = percentageGrowth.doubleValue();
-//            System.out.println(er);
-//            System.out.println("");
-            
+            BigDecimal percentageGrowth = growth.multiply(BigDecimal.valueOf(100));            
+            double er = percentageGrowth.doubleValue();  
             expectedReturns.add(er);
         }
-        stock.setExpectedReturns(expectedReturns);
+        //stock.ExpectedReturns will contain %growth from oldest newest
+        stock.setDailyExpectedReturns(expectedReturns);
     }
     
     public void calculateAnnualAverageExpectedReturn(Stock stock){
-        double[] target = new double[stock.getExpectedReturns().size()];
+        //Double -> double
+        double[] target = new double[stock.getDailyExpectedReturns().size()];
         for (int i = 0; i < target.length; i++) {
-            target[i] = stock.getExpectedReturns().get(i);
-//            System.out.println(target[i]);
-        }
-        
+            target[i] = stock.getDailyExpectedReturns().get(i);
+        }        
+        //get Mean of daily expected returns (ER)
         this.stat = new DescriptiveStatistics(target);
         double dailyER = this.stat.getMean();
-        System.out.println(dailyER);
-        double a = 1-(dailyER/100);
-        System.out.println(a);
-        double b = 365-1;
-        System.out.println(b);
-        double annualER = Math.pow(a, b);
-        
-        System.out.println(annualER);
-        //(1-R/100)^365-1
-        
-        
+        System.out.println("dER: " + dailyER);
+        //annualize daily ER: (1+(ER/100))^365-1        
+        double a = 1+(dailyER/100);                
+        double annualER = Math.pow(a, 364);
+
         BigDecimal annual = new BigDecimal(annualER);
         BigDecimal scaledDailyER = annual.setScale(2, RoundingMode.HALF_UP);
         
         stock.seteR(""+scaledDailyER.toString());
-        System.out.println("avgER: " + stock.geteR());
-        
-        
-        
+        System.out.println("avgER: " + stock.geteR()); 
+    }
+    
+    public void print(Stock stock){
+        List<Double> list = stock.getDailyExpectedReturns();
+        for (Double double1 : list) {
+            System.out.println(double1);
+        }
+
+        List<String[]> list1 = stock.getHistoricalData();
+        for (String[] strings : list1) {
+            System.out.println(strings[0] + " " + strings[1]);
+
+        }
     }
     
     

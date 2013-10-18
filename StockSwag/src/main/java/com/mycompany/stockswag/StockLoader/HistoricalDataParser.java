@@ -16,22 +16,18 @@ import java.util.logging.Logger;
  * @author EliAir
  */
 public class HistoricalDataParser extends CSVParser {
-
     
     public HistoricalDataParser(){
         super();
     }
 
-
     @Override
     public void parseCSVfile() {
-        String[] CSVline = null;          
-        
+        String[] CSVline = null;                  
         CSVReader reader;
         try {
             reader = new CSVReader(new FileReader(super.CSVfile));   
             while ((CSVline = reader.readNext()) != null) {
-                // nextLine[] is an array of values from the line 
                 String[] editedLine = {null, null};
                 editedLine[0] = CSVline[0];
                 editedLine[1] = CSVline[CSVline.length-1];
@@ -42,8 +38,7 @@ public class HistoricalDataParser extends CSVParser {
             Logger.getLogger(LatestDataParser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(LatestDataParser.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-        
+        }            
     }
 
 

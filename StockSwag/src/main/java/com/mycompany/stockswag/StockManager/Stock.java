@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Represents individual Stocks in StockSwag.
+ * historicalData contains date & price pairs starting from newest.
+ * dailyExpectedReturns contains %growths starting from oldest. Values in %!
  * 
  * @author EliAir
  */
@@ -22,7 +24,7 @@ public class Stock {
     private String pb;
     private String eR;
     private List<String[]> historicalData;
-    private List<Double> expectedReturns;
+    private List<Double> dailyExpectedReturns;
     
     
     
@@ -98,12 +100,12 @@ public class Stock {
         return this.name + this.symbol + this.closePrice + this.eps + this.pe + this.ps + this.pb;
     }
 
-    public List<Double> getExpectedReturns() {
-        return expectedReturns;
+    public List<Double> getDailyExpectedReturns() {
+        return dailyExpectedReturns;
     }
 
-    public void setExpectedReturns(List<Double> expectedReturns) {
-        this.expectedReturns = expectedReturns;
+    public void setDailyExpectedReturns(List<Double> expectedReturns) {
+        this.dailyExpectedReturns = expectedReturns;
     }
 
     public String geteR() {

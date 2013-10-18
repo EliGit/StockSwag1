@@ -138,6 +138,16 @@ public class StockSwag {
         return this.stockManager.getStocks();
     }
     
+    public StockAnalyzer getStockAnalyzer() {
+        return stockAnalyzer;
+    }
+    
+    public void addTicker(String ticker){
+        this.tickers.add(ticker);
+    }
+    
+    
+    
     /**
      * Calculate Expected returns for all stocks in StockManager.
      */
@@ -154,13 +164,11 @@ public class StockSwag {
         }
         this.stockAnalyzer.calculateAnnualAverageExpectedReturn(this.stockManager.getIndex());
     }
-
-    public StockAnalyzer getStockAnalyzer() {
-        return stockAnalyzer;
-    }
     
-    public void addTicker(String ticker){
-        this.tickers.add(ticker);
+    public void calculateBetas(){
+        
     }
+
+
         
 }

@@ -43,7 +43,13 @@ public class StockAnalyzerTest {
     public void calculateDailyExpRetsWorks(){
         sa.calculateDailyExpectedReturns(s.getStocks().get(0));
         sa.calculateAnnualAverageExpectedReturn(s.getStocks().get(0));
+        sa.print(s.getStocks().get(0));
     }
+    
+//    @Test
+//    public void print(){
+//        sa.print(s.getStocks().get(0));
+//    }
     
 //    @Test
 //    public void calculateAvgERWorks(){
