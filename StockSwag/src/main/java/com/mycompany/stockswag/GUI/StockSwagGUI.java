@@ -57,13 +57,9 @@ public class StockSwagGUI extends javax.swing.JFrame {
         StatusScreen = new javax.swing.JTextArea();
         copyRightField = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         SearchStocksButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
         StockAnalysisPane = new javax.swing.JScrollPane();
         StockAnalysisArea = new javax.swing.JTextArea();
         AnalyzeButton = new javax.swing.JButton();
@@ -170,6 +166,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
         jToolBar1.setPreferredSize(new java.awt.Dimension(1000, 25));
+        jToolBar1.add(jSeparator2);
 
         SearchStocksButton.setText("Search Stocks");
         SearchStocksButton.setFocusable(false);
@@ -182,26 +179,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(SearchStocksButton);
         jToolBar1.add(jSeparator1);
-
-        jButton4.setText("jButton4");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
-        jToolBar1.add(jSeparator2);
-
-        jButton2.setText("jButton2");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
-        jToolBar1.add(jSeparator3);
-
-        jButton3.setText("jButton3");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
 
         StockAnalysisArea.setColumns(20);
         StockAnalysisArea.setRows(5);
@@ -332,6 +309,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private void loadStocksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadStocksButtonActionPerformed
         // TODO add your handling code here:        
         if(this.stockSwag.validateTickersList()){
+            
             this.StatusScreen.append("Fetching stock data!\n");
             this.stockSwag.downloadStocks();
             openPortfolioInJTable();
@@ -364,7 +342,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
             this.StatusScreen.append("No stocks loaded to analyze! Load stocks first. \n");
         } else {
             this.stockSwag.downloadHistoricalData();
-            setListenerToJTableAfterAnalysis();
+            Analyze();
         }
         
         
@@ -377,7 +355,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(StockSwagGUI.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             
-            
+            this.stockSwag.clearStocks();
             File file = fc.getSelectedFile();
             System.out.println("Loading stocks from file: " + file);
             this.stockSwag.loadStocksFromFile(file);
@@ -397,7 +375,7 @@ public class StockSwagGUI extends javax.swing.JFrame {
             File[] files = fc.getSelectedFiles();
             System.out.println("Loading historical data from files: " + files);
             this.stockSwag.loadHistoricalDataFromFiles(files);
-            setListenerToJTableAfterAnalysis();
+            Analyze();
             
             } 
     }//GEN-LAST:event_openHistoricalDataMenuItemActionPerformed
@@ -440,16 +418,18 @@ public class StockSwagGUI extends javax.swing.JFrame {
      * Handles necessary Index download and calculations, and sets up a listener for PortfolioTable so user can view the analysis of each stock.
      */
     
-    public void setListenerToJTableAfterAnalysis(){
+    public void Analyze(){
+        StockAnalysisArea.setText("Please wait... calculating Expected Returns");
         this.stockSwag.downloadIndexData();
-        this.stockSwag.calculateDailyExpectedReturns();
+        this.stockSwag.calculateDailyReturns();
         this.stockSwag.calculateERs();
+        StockAnalysisArea.setText("Select a stock to see Average Return: \n");
         this.PortfolioTable.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener(){
                     public void valueChanged(ListSelectionEvent e) {
                         int selectedRow = PortfolioTable.getSelectedRow();
                         if(selectedRow >= 0){
-                            StockAnalysisArea.setText(""+stocks.get(selectedRow).geteR());
+                            StockAnalysisArea.setText("Select a stock to see Average Return: \n"+stocks.get(selectedRow).geteR());
                         }
                         
                     }
@@ -478,9 +458,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private javax.swing.JList StockList;
     private javax.swing.JScrollPane StockListPane;
     private javax.swing.JTextField copyRightField;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -489,7 +466,6 @@ public class StockSwagGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton loadStocksButton;
     private javax.swing.JMenuItem openHistoricalDataMenuItem;

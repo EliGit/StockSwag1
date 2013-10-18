@@ -10,8 +10,8 @@ import javax.swing.UIManager;
 
 
 /**
- * Hello world!
- *
+ * StockSwag, Ohjelmoinnin harjoitystyö. Javalabra 2013.
+ * @author EliAir
  */
 public class App 
 {
@@ -54,7 +54,7 @@ public class App
         SwingUtilities.invokeLater(gui);
         
 
-//  Command Line Interface       
+//  Command Line Interface, not supported anymore.       
 //        Scanner inputScanner = new Scanner(System.in);                               
 //        UI ui = new UI(inputScanner, stockSwag);
 //        ui.run();

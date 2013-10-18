@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides functionality for analyzing and keeping track of all stocks.
+ * Provides functionality for keeping track of all stocks.
  * 
  * @author EliAir
  */

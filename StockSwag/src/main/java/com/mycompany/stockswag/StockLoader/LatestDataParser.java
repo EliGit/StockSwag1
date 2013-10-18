@@ -13,13 +13,15 @@ import java.util.logging.Logger;
 
 
 /**
- * CSV parsing functionality.
+ * Parses latest data from Yahoo Finance CSV File.
+ * Subclass of CSVParser.
  * @author EliAir
  */
 public class LatestDataParser extends CSVParser {
     
     /**
-     * Constructor
+     * Constructor.
+     * See CSVParser.
      * @param CSVfile 
      */
     public LatestDataParser(){
@@ -29,6 +31,7 @@ public class LatestDataParser extends CSVParser {
     /**
      * Parses the Yahoo Finance CSV file and saves each line to a list.
      */
+    @Override
     public void parseCSVfile(){         
         CSVReader reader;
         try {

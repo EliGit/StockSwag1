@@ -15,7 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Builds the URL based on the stock ticker symbols.
+ * Builds Yahoo Finance URLs.
+ * Used for generating links for latest and historical data in Yahoo Finance.
+ * 
  * @author EliAir
  */
 public class URLbuilder {
@@ -24,7 +26,8 @@ public class URLbuilder {
     private URL url;
     
     /**
-     * Constructor.
+     * Constructor for URLbuilder.
+     * Initializes lastestDataSymbols.
      * @param symbols List of stock ticker symbols. 
      */
     public URLbuilder() {
@@ -36,10 +39,12 @@ public class URLbuilder {
         this.latestDataSymbols = latestDataSymbols;
     }
     
-    //http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snl1rep5p6
     
     /**
-     * Builds a URL to get the right data from Yahoo as a CSV file.
+     * Builds a Yahoo Finance URL used to download the latest stock data based on the ticker symbols in latestDataSymbols.
+     * An example link would be: http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snl1rep5p6. 
+     * The method adds the correct stocks to the link.
+     * 
      */
     public void buildLatestDataStringURL(){  
         String url_first = "http://finance.yahoo.com/d/quotes.csv?s=";
@@ -53,7 +58,13 @@ public class URLbuilder {
         this.stringURL = url_first + url_middle + url_last;                       
     }
     
-    //http://ichart.finance.yahoo.com/table.csv?s=TSLA&d=8&e=30&f=2013&g=d&a=5&b=29&c=2010&ignore=.csv 
+    /**
+     * Gets historical data for the specified symbol.
+     * The historical data starting date is 1.1.2008. Some stocks (Like TSLA) do not have data this old. Yahoo will then return the oldest possible data.
+     * The data is gathered from the starting date to current date.
+     * Example link: http://ichart.finance.yahoo.com/table.csv?s=TSLA&d=8&e=30&f=2013&g=d&a=5&b=29&c=2010&ignore=.csv 
+     * @param symbol 
+     */
    
     public void buildHistoricalDataStringURL(String symbol){
         Calendar c = new GregorianCalendar();
@@ -79,13 +90,22 @@ public class URLbuilder {
         return this.stringURL;
     }
     
-    private void buildURL(){
+    /**
+     * Builds a URL object from the String URL.
+     */
+    public void buildURL(){
         try{
             this.url = new URL(this.stringURL);
         } catch (MalformedURLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     * Uses buildURL to build a URL and then returns it.
+     * Since this method is never used alone, the use of buildURL is automatic.
+     * @return 
+     */
         
     public URL getURL(){
         buildURL();                

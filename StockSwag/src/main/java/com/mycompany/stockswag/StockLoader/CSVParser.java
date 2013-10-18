@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * CSV parsing functionality.
+ * Superclass for HistoricalDataParser and LatestDataParser.
+ * Saves CSV data to List<String[]> format.
  * @author EliAir
  */
 public abstract class CSVParser {

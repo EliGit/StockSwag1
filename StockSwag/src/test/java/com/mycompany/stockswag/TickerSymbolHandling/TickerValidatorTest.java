@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.stockswag;
+package com.mycompany.stockswag.TickerSymbolHandling;
 
 import com.mycompany.stockswag.TickerSymbolHandling.TickerValidator;
 import java.io.File;

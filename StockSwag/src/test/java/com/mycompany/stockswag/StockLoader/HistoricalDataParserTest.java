@@ -44,7 +44,7 @@ public class HistoricalDataParserTest {
     @Test
     public void parseCSVfileWorks(){
         CSVparser.parseCSVfile();
-        assertEquals(line, CSVparser.getLines().get(0));
+        assertEquals(line, CSVparser.getLines().get(1));
     }
 
 }

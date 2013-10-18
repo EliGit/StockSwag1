@@ -20,7 +20,7 @@ public class PortfolioTableDataModel extends AbstractTableModel {
     
     /**
      * Constructor for PortfolioTableDataModel.
-     * Initializes the table with 7 named columnds ("Name", "Symbol", "Close Price", "P/E", "EPS", "P/S", "P/B") and specified amount of rows.
+     * Initializes the table with 7 named columns ("Name", "Symbol", "Close Price", "P/E", "EPS", "P/S", "P/B") and specified amount of rows.
      * @param rows 
      */
     

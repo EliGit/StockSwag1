@@ -5,6 +5,9 @@
 package com.mycompany.stockswag.textUI;
 
 /**
+ * 
+ * CLI NOT SUPPORTED IN STOCKSWAG.
+ * This class was for testing purposes in early development.
  * Contains printable items for CLI.
  * @author elnygren
  */

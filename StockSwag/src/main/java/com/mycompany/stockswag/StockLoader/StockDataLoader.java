@@ -66,21 +66,38 @@ public class StockDataLoader {
         
     }
     
+    /**
+     * Builds a URL for downloading historical data from Yahoo Finance.
+     * @param symbol contains the stock's symbol
+     */
     public void buildHistoricalDataURL(String symbol){
         this.URLbuilder.buildHistoricalDataStringURL(symbol);
     }
    
+    /**
+     * Builds a URL for downloading latest stock data for all selected stocks from Yahoo Finance.
+     * @param tickers contains the selected stock ticker symbols.
+     */
     public void buildURLFromTickers(List<String> tickers){
         
         this.URLbuilder.setLatestDataSymbols(tickers);
         this.URLbuilder.buildLatestDataStringURL();
     }
     
+    /**
+     * Parses the latest stock data from the CSV file.
+     * @param CSVfile contains the latest data of one stock.
+     */
     public void parseLatestData(File CSVfile){    
         
         this.latestDataParser.setCSVfile(CSVfile);
         this.latestDataParser.parseCSVfile();
     }
+    
+    /**
+     * Parses the historical stock data from the CSV file.
+     * @param CSVfile contains historical data of one stock.
+     */
     
     public void parseHistoricalData(File CSVfile){
 
@@ -88,11 +105,22 @@ public class StockDataLoader {
         this.historicalDataParser.parseCSVfile();
     }
     
+    /**
+     * Parses the historical stock data from the CSV file.
+     * @param file CSVfile opened by user.
+     * @return List<String[]> containing the stock data.
+     */
     public List<String[]> fetchHistoricalStockDataFromFile(File file){                                                
         //parse given CSV
         parseHistoricalData(file);        
         return this.historicalDataParser.getLines();        
     }
+    
+    /**
+     * Parses the latest stock data from the CSV file and returns it.
+     * @param file CSVfile opened by user.
+     * @return List<String[]> containing the stock data.
+     */
     
     public List<String[]> fetchLatestStockDataFromFile(File file){                                                
         //parse given CSV

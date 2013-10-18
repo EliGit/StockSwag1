@@ -149,14 +149,18 @@ public class StockSwag {
     
     
     /**
-     * Calculate Expected returns for all stocks in StockManager.
+     * Calculate daily returns for all stocks in StockManager.
      */
-    public void calculateDailyExpectedReturns(){
+    public void calculateDailyReturns(){
         for (Stock stock : this.stockManager.getStocks()) {
-            this.stockAnalyzer.calculateDailyExpectedReturns(stock);
+            this.stockAnalyzer.calculateDailyReturns(stock);
         }
-        this.stockAnalyzer.calculateDailyExpectedReturns(this.stockManager.getIndex());
+        this.stockAnalyzer.calculateDailyReturns(this.stockManager.getIndex());
     }
+    
+    /**
+     * Calculate Expected Returns for all stocks in StockManager.
+     */
     
     public void calculateERs(){
         for(Stock stock : this.stockManager.getStocks()){
@@ -165,9 +169,11 @@ public class StockSwag {
         this.stockAnalyzer.calculateAnnualAverageExpectedReturn(this.stockManager.getIndex());
     }
     
-    public void calculateBetas(){
-        
-    }
+    //requires calculating variances for historical data and covariances with historical data of a stock and the index.
+    //this can be done with the DescriptiveStatistics library.
+//    public void calculateBetas(){
+//        
+//    }
 
 
         

@@ -4,9 +4,6 @@
  */
 package com.mycompany.stockswag.StockManager;
 
-import com.mycompany.stockswag.StockManager.StockManager;
-import com.mycompany.stockswag.StockManager.StockFactory;
-import com.mycompany.stockswag.StockManager.Stock;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

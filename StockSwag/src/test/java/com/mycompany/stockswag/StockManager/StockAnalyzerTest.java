@@ -8,7 +8,6 @@ import com.mycompany.stockswag.StockSwag;
 import java.io.File;
 import java.util.List;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -40,22 +39,12 @@ public class StockAnalyzerTest {
     }
     
     @Test
-    public void calculateDailyExpRetsWorks(){
-        sa.calculateDailyExpectedReturns(s.getStocks().get(0));
+    public void calculateAnnualAverageExpectedReturnWorks(){
+        sa.calculateDailyReturns(s.getStocks().get(0));
         sa.calculateAnnualAverageExpectedReturn(s.getStocks().get(0));
-        sa.print(s.getStocks().get(0));
+        assertEquals(""+215, s.getStocks().get(0).geteR());
     }
     
-//    @Test
-//    public void print(){
-//        sa.print(s.getStocks().get(0));
-//    }
-    
-//    @Test
-//    public void calculateAvgERWorks(){
-//        sa.calculateDailyExpectedReturns(s.getStocks().get(0));
-//        
-//    }
     
 
 }

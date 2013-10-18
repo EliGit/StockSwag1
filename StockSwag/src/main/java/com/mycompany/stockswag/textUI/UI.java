@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ * CLI NOT SUPPORTED IN STOCKSWAG.
+ * This class was for testing purposes in early development.
  * @author elnygren
  */
 public class UI {

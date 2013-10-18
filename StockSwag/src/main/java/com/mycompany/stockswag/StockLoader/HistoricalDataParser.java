@@ -12,15 +12,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Parses Historical data from Yahoo Finance CSV file.
+ * Subclass of CSVParser.
  * @author EliAir
  */
 public class HistoricalDataParser extends CSVParser {
     
+    /**
+     * Constructor.
+     * See CSVParser superclass.
+     */
     public HistoricalDataParser(){
         super();
     }
 
+    /**
+     * Parses Historical data. Saves first (date) and last (price) elements of the CSV line only.
+     */
     @Override
     public void parseCSVfile() {
         String[] CSVline = null;                  
